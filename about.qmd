@@ -4,6 +4,8 @@ title: "About"
 
 About this site
 
-```{r}
-1 + 1
-```
+Name: Tan Zhi Hao
+
+Course: ISSS608-Visual Analytics and Applications-G1
+
+Term: Jan-Apr 2023

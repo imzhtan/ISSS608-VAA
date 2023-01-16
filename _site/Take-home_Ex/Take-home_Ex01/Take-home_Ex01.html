@@ -6,9 +6,9 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
-<meta name="author" content="imzhtan">
+<meta name="author" content="Tan Zhi Hao">
 
-<title>ISSS608-VAA - Hands-on Exercise 1</title>
+<title>ISSS608-VAA - Take-home Exercise 1</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -21,69 +21,6 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1.6em;
   vertical-align: middle;
 }
-pre > code.sourceCode { white-space: pre; position: relative; }
-pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
-pre > code.sourceCode > span:empty { height: 1.2em; }
-.sourceCode { overflow: visible; }
-code.sourceCode > span { color: inherit; text-decoration: inherit; }
-div.sourceCode { margin: 1em 0; }
-pre.sourceCode { margin: 0; }
-@media screen {
-div.sourceCode { overflow: auto; }
-}
-@media print {
-pre > code.sourceCode { white-space: pre-wrap; }
-pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
-}
-pre.numberSource code
-  { counter-reset: source-line 0; }
-pre.numberSource code > span
-  { position: relative; left: -4em; counter-increment: source-line; }
-pre.numberSource code > span > a:first-child::before
-  { content: counter(source-line);
-    position: relative; left: -1em; text-align: right; vertical-align: baseline;
-    border: none; display: inline-block;
-    -webkit-touch-callout: none; -webkit-user-select: none;
-    -khtml-user-select: none; -moz-user-select: none;
-    -ms-user-select: none; user-select: none;
-    padding: 0 4px; width: 4em;
-    color: #aaaaaa;
-  }
-pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
-div.sourceCode
-  {   }
-@media screen {
-pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
-}
-code span.al { color: #ff0000; font-weight: bold; } /* Alert */
-code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
-code span.at { color: #7d9029; } /* Attribute */
-code span.bn { color: #40a070; } /* BaseN */
-code span.bu { color: #008000; } /* BuiltIn */
-code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
-code span.ch { color: #4070a0; } /* Char */
-code span.cn { color: #880000; } /* Constant */
-code span.co { color: #60a0b0; font-style: italic; } /* Comment */
-code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
-code span.do { color: #ba2121; font-style: italic; } /* Documentation */
-code span.dt { color: #902000; } /* DataType */
-code span.dv { color: #40a070; } /* DecVal */
-code span.er { color: #ff0000; font-weight: bold; } /* Error */
-code span.ex { } /* Extension */
-code span.fl { color: #40a070; } /* Float */
-code span.fu { color: #06287e; } /* Function */
-code span.im { color: #008000; font-weight: bold; } /* Import */
-code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
-code span.kw { color: #007020; font-weight: bold; } /* Keyword */
-code span.op { color: #666666; } /* Operator */
-code span.ot { color: #007020; } /* Other */
-code span.pp { color: #bc7a00; } /* Preprocessor */
-code span.sc { color: #4070a0; } /* SpecialChar */
-code span.ss { color: #bb6688; } /* SpecialString */
-code span.st { color: #4070a0; } /* String */
-code span.va { color: #19177c; } /* Variable */
-code span.vs { color: #4070a0; } /* VerbatimString */
-code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
 </style>
 
 
@@ -190,12 +127,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#getting-started" id="toc-getting-started" class="nav-link active" data-scroll-target="#getting-started">Getting Started</a>
-  <ul class="collapse">
-  <li><a href="#install-and-launching-r-packages" id="toc-install-and-launching-r-packages" class="nav-link" data-scroll-target="#install-and-launching-r-packages">Install and launching R packages</a></li>
-  <li><a href="#importing-the-data" id="toc-importing-the-data" class="nav-link" data-scroll-target="#importing-the-data">Importing the data</a></li>
-  </ul></li>
-  <li><a href="#plotting-a-simple-bar-chart" id="toc-plotting-a-simple-bar-chart" class="nav-link" data-scroll-target="#plotting-a-simple-bar-chart">Plotting a simple bar chart</a></li>
+  <li><a href="#introduction" id="toc-introduction" class="nav-link active" data-scroll-target="#introduction">1. Introduction</a></li>
+  <li><a href="#step-by-step-procedure" id="toc-step-by-step-procedure" class="nav-link" data-scroll-target="#step-by-step-procedure">2. Step-by-step procedure</a></li>
+  <li><a href="#write-up-on-patterns-observed-from-visualization" id="toc-write-up-on-patterns-observed-from-visualization" class="nav-link" data-scroll-target="#write-up-on-patterns-observed-from-visualization">3. Write-up on Patterns observed from visualization</a></li>
   </ul>
 </nav>
     </div>
@@ -204,7 +138,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">Hands-on Exercise 1</h1>
+<h1 class="title">Take-home Exercise 1</h1>
 </div>
 
 
@@ -214,7 +148,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
     <div>
     <div class="quarto-title-meta-heading">Author</div>
     <div class="quarto-title-meta-contents">
-             <p>imzhtan </p>
+             <p>Tan Zhi Hao </p>
           </div>
   </div>
     
@@ -225,44 +159,157 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 
 </header>
 
-<section id="getting-started" class="level1">
-<h1>Getting Started</h1>
-<section id="install-and-launching-r-packages" class="level2">
-<h2 class="anchored" data-anchor-id="install-and-launching-r-packages">Install and launching R packages</h2>
-<p>The code chunk below uses p_load() of pacman package to check if tidyverse packages are installed in the computer. If they are, then they will be launched into R.</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>pacman<span class="sc">::</span><span class="fu">p_load</span>(tidyverse)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<section id="introduction" class="level1">
+<h1>1. Introduction</h1>
+<p>In this exercise, I created a 3x3 trellis view dashboard of the Age-Sex pyramid of Singapore’s resident population for 9 of the 55 planning areas in Singapore for 2022. The data is a CSV file extracted from <a href="https://www.singstat.gov.sg/find-data/search-by-theme/population/geographic-distribution/latest-data">Singstat website</a> named <em>‘respopagesextod2022’.</em></p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images/image-1433414553.png" class="img-fluid figure-img"></p>
+<p></p><figcaption class="figure-caption"><em>Figure 1: A snapshot of the dataset used</em></figcaption><p></p>
+</figure>
 </div>
+<p>I created a multi-select filter card for planning area so that we can choose whichever 9 planning areas we want to visualize.</p>
 </section>
-<section id="importing-the-data" class="level2">
-<h2 class="anchored" data-anchor-id="importing-the-data">Importing the data</h2>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>exam_data <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"data/Exam_data.csv"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stderr">
-<pre><code>Rows: 322 Columns: 7
-── Column specification ────────────────────────────────────────────────────────
-Delimiter: ","
-chr (4): ID, CLASS, GENDER, RACE
-dbl (3): ENGLISH, MATHS, SCIENCE
-
-ℹ Use `spec()` to retrieve the full column specification for this data.
-ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.</code></pre>
-</div>
-</div>
+<section id="step-by-step-procedure" class="level1">
+<h1>2. Step-by-step procedure</h1>
+<table class="table">
+<colgroup>
+<col style="width: 1%">
+<col style="width: 75%">
+<col style="width: 22%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>No.</th>
+<th>Step</th>
+<th>Screenshot</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>1</td>
+<td><p>Load the excel file into Tableau. Drag ‘<em>respopagesextod2022</em>’ worksheet into the main pane under Data Source.</p>
+<p><em>Note: No pre-cleaning of the data is necessary for this exercise, as the aggregations (e.g.&nbsp;sum of population count by gender, age group, planning area) will automatically be done by Tableau when the graphs are created. The data types will also not impact the final visualization (e.g.&nbsp;year is not used).</em></p></td>
+<td><img src="images/image-1797384571.png" class="img-fluid"></td>
+</tr>
+<tr class="even">
+<td>2</td>
+<td><p>Create a new sheet. We start by creating just 1 Age-Sex pyramid for the whole resident population first.</p>
+<p>Click on the down arrow as shown in red circle in the the screenshot and create calculated fields ‘CountFemales’ and ‘CountMales’ using the formula in the screenshot, by selecting</p></td>
+<td><p><img src="images/image-1149882038.png" class="img-fluid" width="95"></p>
+<p><img src="images/image-786238496.png" class="img-fluid" width="173"><img src="images/image-1228270616.png" class="img-fluid" width="176"></p></td>
+</tr>
+<tr class="odd">
+<td>3</td>
+<td>Drag ‘Age Group’ into the Rows field and ‘CountMales’ and ‘CountFemales’ into the Columns field.</td>
+<td><img src="images/image-1052230578.png" class="img-fluid"></td>
+</tr>
+<tr class="even">
+<td>4</td>
+<td>Right click on ‘CountMales’ on the horizontal axis and click ‘Edit Axis’. Select ‘Reversed’ under Scale.</td>
+<td><img src="images/image-576089771.png" class="img-fluid"></td>
+</tr>
+<tr class="odd">
+<td>5</td>
+<td>To filter only 9 planning areas, drag ‘Planning Areas’ to the Filters box. Randomly select 9 planning areas first.</td>
+<td><img src="images/image-328312277.png" class="img-fluid"></td>
+</tr>
+<tr class="even">
+<td>6</td>
+<td>Click on the arrow in the ‘Planning areas’ pill and select ‘Show Filter’ to display the filter card so that you can select any planning areas you wish to visualize later on.</td>
+<td><img src="images/image-305429127.png" class="img-fluid" width="161"><img src="images/image-288257676.png" class="img-fluid" width="93"></td>
+</tr>
+<tr class="odd">
+<td>7</td>
+<td>Under Marks box -&gt; ‘Sum(CountFemales)’, click on ‘Color’ and select the desired color to differentiate the sexes by color.</td>
+<td><img src="images/image-1561715134.png" class="img-fluid"></td>
+</tr>
+<tr class="even">
+<td>8</td>
+<td>Next, we create the Trellis View. Create a new calculated field, ‘Index’ using the formula shown in the screenshot.</td>
+<td><img src="images/image-315860669.png" class="img-fluid"></td>
+</tr>
+<tr class="odd">
+<td>9</td>
+<td>Create a new parameter called ‘# of Columns’, choose Data Type ‘Integer and input ’3’ under Current Value. This is because we want to have a 3 x 3 Trellis View.</td>
+<td><img src="images/image-1149882038.png" class="img-fluid" width="117"><img src="images/image-1784285514.png" class="img-fluid" width="212"></td>
+</tr>
+<tr class="even">
+<td>10</td>
+<td><p>Create 2 new calculated fields, ‘Rows’ and ‘Columns’ using the formulas shown in the screenshot.</p>
+<p>After creating these new variables, click on the down arrow when hovering over them on the left panel and convert to ‘discrete’.</p></td>
+<td><img src="images/image-1702854297.png" class="img-fluid" width="220"><img src="images/image-1761891131.png" class="img-fluid" width="222"></td>
+</tr>
+<tr class="odd">
+<td>11</td>
+<td>Drag ‘Rows’ into the Rows field and ‘Columns’ into the Columns field. Drag ‘Planning Area’ into the Label box under Marks -&gt; All.</td>
+<td><img src="images/image-1227004810.png" class="img-fluid"></td>
+</tr>
+<tr class="even">
+<td>12</td>
+<td><p>Click on the down arrow in the ‘Columns’ pill in the Columns field and select Compute Using -&gt; Planning Area.</p>
+<p>Do the same for the ‘Rows’ pill in the Rows field.</p></td>
+<td><img src="images/image-1764637329.png" class="img-fluid" width="296"></td>
+</tr>
+<tr class="odd">
+<td>13</td>
+<td><p>Next, we move on to labeling the planning areas.</p>
+<p>First, un-check ‘Show mark labels’ by clicking on Label under Marks -&gt; All.</p></td>
+<td><img src="images/image-197780823.png" class="img-fluid" width="355"></td>
+</tr>
+<tr class="even">
+<td>14</td>
+<td>Create a new variable directly within the Columns field by double-clicking on an empty space within it. Type in ‘AVG(0)’. Drag the newly created pill to the left of SUM(CountMales).</td>
+<td><img src="images/image-1158170959.png" class="img-fluid"></td>
+</tr>
+<tr class="odd">
+<td>15</td>
+<td>Under Marks -&gt; AGG(AVG(0)), change the type to ‘Line’ and the Opacity to 0%.</td>
+<td><img src="images/image-10513308.png" class="img-fluid" width="109"></td>
+</tr>
+<tr class="even">
+<td>16</td>
+<td>Drag ‘Planning Area’ to Label under Marks -&gt; AGG(AVG(0)). Select ‘Line Ends’ under Marks to label and un-check .Label end of line’.</td>
+<td><img src="images/image-507825079.png" class="img-fluid"></td>
+</tr>
+<tr class="odd">
+<td>17</td>
+<td><p>Lastly, improve the aesthetics.</p>
+<p>Hide the headers on the top and left by right-clicking and de-selecting ‘Show Header’.</p></td>
+<td><img src="images/image-1938844378.png" class="img-fluid" width="116"></td>
+</tr>
+<tr class="even">
+<td>18</td>
+<td>Change the order of Age Group by Data source order so that youngest Age Group is at the bottom and oldest at the top.</td>
+<td><img src="images/image-1679864339.png" class="img-fluid" width="171"><img src="images/image-949094237.png" class="img-fluid" width="182"></td>
+</tr>
+<tr class="odd">
+<td>19</td>
+<td><p>Change the title of the sheet by clicking on the title field or changing it dynamically in the sheet name.</p>
+<p>Change the labels on the horizontal axis by right-clicking on them.</p></td>
+<td><img src="images/image-327183518.png" class="img-fluid"></td>
+</tr>
+<tr class="even">
+<td>20</td>
+<td>Add or delete information in the tooltip under Marks -&gt; All -&gt; Tooltip.</td>
+<td><img src="images/image-312910707.png" class="img-fluid"></td>
+</tr>
+<tr class="odd">
+<td>21</td>
+<td><p>Create a new dashboard ‘Dashboard 1’, drag ‘Age-Sex Pyramid for Selected Planning Areas in Singapore, 2022’ into the pane.</p>
+<p>In this case, as we only have one visualization in the dashboard, there is no need to add title text or make other changes.</p></td>
+<td><img src="images/image-237145885.png" class="img-fluid"></td>
+</tr>
+<tr class="even">
+<td>22</td>
+<td>Adjust the size of charts, dashboard, etc. for better presentation. Extract data if necessary. Click Server -&gt; Tableau Public -&gt; Save to Tableau Public’ for publishing.</td>
+<td><img src="images/image-1227294122.png" class="img-fluid"></td>
+</tr>
+</tbody>
+</table>
 </section>
-</section>
-<section id="plotting-a-simple-bar-chart" class="level1">
-<h1>Plotting a simple bar chart</h1>
-<p>#| eval: false -&gt; to hide output</p>
-<p>#| echo: false -&gt; to hide code</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> exam_data,</span>
-<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>       <span class="fu">aes</span>(<span class="at">x =</span> RACE)) <span class="sc">+</span></span>
-<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_bar</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output-display">
-<p><img src="Hands-on_Ex01_files/figure-html/unnamed-chunk-3-1.png" class="img-fluid" width="672"></p>
-</div>
-</div>
+<section id="write-up-on-patterns-observed-from-visualization" class="level1">
+<h1>3. Write-up on Patterns observed from visualization</h1>
 
 
 </section>
