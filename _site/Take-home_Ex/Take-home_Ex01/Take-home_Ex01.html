@@ -174,135 +174,135 @@ ul.task-list li input[type="checkbox"] {
 <h1>2. Step-by-step procedure</h1>
 <table class="table">
 <colgroup>
-<col style="width: 1%">
-<col style="width: 75%">
-<col style="width: 22%">
+<col style="width: 10%">
+<col style="width: 30%">
+<col style="width: 60%">
 </colgroup>
 <thead>
 <tr class="header">
 <th>No.</th>
-<th>Step</th>
+<th style="text-align: left;">Step</th>
 <th>Screenshot</th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
 <td>1</td>
-<td><p>Load the excel file into Tableau. Drag ‘<em>respopagesextod2022</em>’ worksheet into the main pane under Data Source.</p>
-<p><em>Note: No pre-cleaning of the data is necessary for this exercise, as the aggregations (e.g.&nbsp;sum of population count by gender, age group, planning area) will automatically be done by Tableau when the graphs are created. The data types will also not impact the final visualization (e.g.&nbsp;year is not used).</em></p></td>
+<td style="text-align: left;"><p>Load the excel file into Tableau. Drag ‘<em>respopagesextod2022</em>’ worksheet into the main pane under Data Source. Rename the variables accordingly (e.g.&nbsp;from AG to ‘Age Group’)</p>
+<p><em>Note: Not much pre-cleaning of the data is necessary for this exercise, as the aggregations (e.g.&nbsp;sum of population count by gender, age group, planning area) will automatically be done by Tableau when the graphs are created. The default data types will also not impact the final visualization (e.g.&nbsp;year is not used).</em></p></td>
 <td><img src="images/image-1797384571.png" class="img-fluid"></td>
 </tr>
 <tr class="even">
 <td>2</td>
-<td><p>Create a new sheet. We start by creating just 1 Age-Sex pyramid for the whole resident population first.</p>
-<p>Click on the down arrow as shown in red circle in the the screenshot and create calculated fields ‘CountFemales’ and ‘CountMales’ using the formula in the screenshot, by selecting</p></td>
+<td style="text-align: left;"><p>Create a new sheet. We start by creating just 1 Age-Sex pyramid for the whole resident population first.</p>
+<p>Click on the down arrow as shown in red circle in the the screenshot and create calculated fields ‘CountFemales’ and ‘CountMales’ using the formula in the screenshot.</p></td>
 <td><p><img src="images/image-1149882038.png" class="img-fluid" width="95"></p>
 <p><img src="images/image-786238496.png" class="img-fluid" width="173"><img src="images/image-1228270616.png" class="img-fluid" width="176"></p></td>
 </tr>
 <tr class="odd">
 <td>3</td>
-<td>Drag ‘Age Group’ into the Rows field and ‘CountMales’ and ‘CountFemales’ into the Columns field.</td>
+<td style="text-align: left;">Drag ‘Age Group’ into the Rows field and ‘CountMales’ and ‘CountFemales’ into the Columns field.</td>
 <td><img src="images/image-1052230578.png" class="img-fluid"></td>
 </tr>
 <tr class="even">
 <td>4</td>
-<td>Right click on ‘CountMales’ on the horizontal axis and click ‘Edit Axis’. Select ‘Reversed’ under Scale.</td>
+<td style="text-align: left;">Right click on ‘CountMales’ on the horizontal axis and click ‘Edit Axis’. Select ‘Reversed’ under Scale.</td>
 <td><img src="images/image-576089771.png" class="img-fluid"></td>
 </tr>
 <tr class="odd">
 <td>5</td>
-<td>To filter only 9 planning areas, drag ‘Planning Areas’ to the Filters box. Randomly select 9 planning areas first.</td>
+<td style="text-align: left;">To filter only 9 planning areas, drag ‘Planning Areas’ to the Filters box. Randomly select 9 planning areas first.</td>
 <td><img src="images/image-328312277.png" class="img-fluid"></td>
 </tr>
 <tr class="even">
 <td>6</td>
-<td>Click on the arrow in the ‘Planning areas’ pill and select ‘Show Filter’ to display the filter card so that you can select any planning areas you wish to visualize later on.</td>
+<td style="text-align: left;">Click on the arrow in the ‘Planning areas’ pill and select ‘Show Filter’ to display the filter card so that you can select any planning areas you wish to visualize later on.</td>
 <td><img src="images/image-305429127.png" class="img-fluid" width="161"><img src="images/image-288257676.png" class="img-fluid" width="93"></td>
 </tr>
 <tr class="odd">
 <td>7</td>
-<td>Under Marks box -&gt; ‘Sum(CountFemales)’, click on ‘Color’ and select the desired color to differentiate the sexes by color.</td>
+<td style="text-align: left;">Under Marks box -&gt; ‘Sum(CountFemales)’, click on ‘Color’ and select the desired color to differentiate the sexes by color.</td>
 <td><img src="images/image-1561715134.png" class="img-fluid"></td>
 </tr>
 <tr class="even">
 <td>8</td>
-<td>Next, we create the Trellis View. Create a new calculated field, ‘Index’ using the formula shown in the screenshot.</td>
+<td style="text-align: left;">Next, we create the Trellis View. Create a new calculated field, ‘Index’ using the formula shown in the screenshot.</td>
 <td><img src="images/image-315860669.png" class="img-fluid"></td>
 </tr>
 <tr class="odd">
 <td>9</td>
-<td>Create a new parameter called ‘# of Columns’, choose Data Type ‘Integer and input ’3’ under Current Value. This is because we want to have a 3 x 3 Trellis View.</td>
+<td style="text-align: left;">Create a new parameter called ‘# of Columns’, choose Data Type ‘Integer and input ’3’ under Current Value. This is because we want to have a 3 x 3 Trellis View.</td>
 <td><img src="images/image-1149882038.png" class="img-fluid" width="117"><img src="images/image-1784285514.png" class="img-fluid" width="212"></td>
 </tr>
 <tr class="even">
 <td>10</td>
-<td><p>Create 2 new calculated fields, ‘Rows’ and ‘Columns’ using the formulas shown in the screenshot.</p>
+<td style="text-align: left;"><p>Create 2 new calculated fields, ‘Rows’ and ‘Columns’ using the formulas shown in the screenshot.</p>
 <p>After creating these new variables, click on the down arrow when hovering over them on the left panel and convert to ‘discrete’.</p></td>
 <td><img src="images/image-1702854297.png" class="img-fluid" width="220"><img src="images/image-1761891131.png" class="img-fluid" width="222"></td>
 </tr>
 <tr class="odd">
 <td>11</td>
-<td>Drag ‘Rows’ into the Rows field and ‘Columns’ into the Columns field. Drag ‘Planning Area’ into the Label box under Marks -&gt; All.</td>
+<td style="text-align: left;">Drag ‘Rows’ into the Rows field and ‘Columns’ into the Columns field. Drag ‘Planning Area’ into the Label box under Marks -&gt; All.</td>
 <td><img src="images/image-1227004810.png" class="img-fluid"></td>
 </tr>
 <tr class="even">
 <td>12</td>
-<td><p>Click on the down arrow in the ‘Columns’ pill in the Columns field and select Compute Using -&gt; Planning Area.</p>
+<td style="text-align: left;"><p>Click on the down arrow in the ‘Columns’ pill in the Columns field and select Compute Using -&gt; Planning Area.</p>
 <p>Do the same for the ‘Rows’ pill in the Rows field.</p></td>
 <td><img src="images/image-1764637329.png" class="img-fluid" width="296"></td>
 </tr>
 <tr class="odd">
 <td>13</td>
-<td><p>Next, we move on to labeling the planning areas.</p>
+<td style="text-align: left;"><p>Next, we move on to labeling the planning areas.</p>
 <p>First, un-check ‘Show mark labels’ by clicking on Label under Marks -&gt; All.</p></td>
 <td><img src="images/image-197780823.png" class="img-fluid" width="355"></td>
 </tr>
 <tr class="even">
 <td>14</td>
-<td>Create a new variable directly within the Columns field by double-clicking on an empty space within it. Type in ‘AVG(0)’. Drag the newly created pill to the left of SUM(CountMales).</td>
+<td style="text-align: left;">Create a new variable directly within the Columns field by double-clicking on an empty space within it. Type in ‘AVG(0)’. Drag the newly created pill to the left of the SUM(CountMales) pill.</td>
 <td><img src="images/image-1158170959.png" class="img-fluid"></td>
 </tr>
 <tr class="odd">
 <td>15</td>
-<td>Under Marks -&gt; AGG(AVG(0)), change the type to ‘Line’ and the Opacity to 0%.</td>
+<td style="text-align: left;">Under Marks -&gt; AGG(AVG(0)), change the type to ‘Line’ and the Opacity to 0%.</td>
 <td><img src="images/image-10513308.png" class="img-fluid" width="109"></td>
 </tr>
 <tr class="even">
 <td>16</td>
-<td>Drag ‘Planning Area’ to Label under Marks -&gt; AGG(AVG(0)). Select ‘Line Ends’ under Marks to label and un-check .Label end of line’.</td>
+<td style="text-align: left;">Drag ‘Planning Area’ to Label under Marks -&gt; AGG(AVG(0)). Select ‘Line Ends’ under ‘Marks to label’ and un-check ‘Label end of line’.</td>
 <td><img src="images/image-507825079.png" class="img-fluid"></td>
 </tr>
 <tr class="odd">
 <td>17</td>
-<td><p>Lastly, improve the aesthetics.</p>
+<td style="text-align: left;"><p>Lastly, improve the aesthetics.</p>
 <p>Hide the headers on the top and left by right-clicking and de-selecting ‘Show Header’.</p></td>
 <td><img src="images/image-1938844378.png" class="img-fluid" width="116"></td>
 </tr>
 <tr class="even">
 <td>18</td>
-<td>Change the order of Age Group by Data source order so that youngest Age Group is at the bottom and oldest at the top.</td>
+<td style="text-align: left;">Change the order of Age Group by Data source order so that youngest Age Group is at the bottom and oldest at the top.</td>
 <td><img src="images/image-1679864339.png" class="img-fluid" width="171"><img src="images/image-949094237.png" class="img-fluid" width="182"></td>
 </tr>
 <tr class="odd">
 <td>19</td>
-<td><p>Change the title of the sheet by clicking on the title field or changing it dynamically in the sheet name.</p>
+<td style="text-align: left;"><p>Change the title of the sheet by clicking on the title field or changing it dynamically in the sheet name.</p>
 <p>Change the labels on the horizontal axis by right-clicking on them.</p></td>
 <td><img src="images/image-327183518.png" class="img-fluid"></td>
 </tr>
 <tr class="even">
 <td>20</td>
-<td>Add or delete information in the tooltip under Marks -&gt; All -&gt; Tooltip.</td>
+<td style="text-align: left;">Add or delete information in the tooltip under Marks -&gt; All -&gt; Tooltip.</td>
 <td><img src="images/image-312910707.png" class="img-fluid"></td>
 </tr>
 <tr class="odd">
 <td>21</td>
-<td><p>Create a new dashboard ‘Dashboard 1’, drag ‘Age-Sex Pyramid for Selected Planning Areas in Singapore, 2022’ into the pane.</p>
+<td style="text-align: left;"><p>Create a new dashboard ‘Dashboard 1’, drag ‘Age-Sex Pyramid for Selected Planning Areas in Singapore, 2022’ into the pane.</p>
 <p>In this case, as we only have one visualization in the dashboard, there is no need to add title text or make other changes.</p></td>
 <td><img src="images/image-237145885.png" class="img-fluid"></td>
 </tr>
 <tr class="even">
 <td>22</td>
-<td>Adjust the size of charts, dashboard, etc. for better presentation. Extract data if necessary. Click Server -&gt; Tableau Public -&gt; Save to Tableau Public’ for publishing.</td>
+<td style="text-align: left;">Adjust the size of charts, dashboard, etc. for better presentation. Extract data if necessary. Click Server -&gt; Tableau Public -&gt; Save to Tableau Public’ for publishing.</td>
 <td><img src="images/image-1227294122.png" class="img-fluid"></td>
 </tr>
 </tbody>
@@ -310,6 +310,17 @@ ul.task-list li input[type="checkbox"] {
 </section>
 <section id="write-up-on-patterns-observed-from-visualization" class="level1">
 <h1>3. Write-up on Patterns observed from visualization</h1>
+<p>For the pattern analysis, I selected 9 planning areas (PA) split equally by <a href="https://www.propertyguru.com.sg/property-guides/ccr-ocr-rcr-region-singapore-ura-map-21045">3 market segments</a> as defined by the Urban Redevelopment Authority (URA):</p>
+<ul>
+<li><p>Core Central Region (CCR): Bukit Timah, Newton, Novena</p></li>
+<li><p>Rest of Central Region (RCR): Bishan, Toa Payoh, Queenstown</p></li>
+<li><p>Outside Central Region (OCR): Jurong East, Tampines, Yishun</p></li>
+</ul>
+<p><strong>(1) For almost all the PA, there seems to be several horizontal peak and troughs. The age groups between 55 to 69, as well as age groups between 25 to 39 are the peaks while the other age groups are the troughs.</strong> This is reflective of the Baby Boomers (around age 59-77) and their children (Millennials around age 27-42), which have relatively more births compared to the other generations.</p>
+<p><strong>(2) In general, more people live in the OCR compared to the RCR which in turn has more people compared to the CCR.</strong> This could be reflective of the ratio of residences compared to other infrastructure in the different regions, as well as affordability. We can see that the age-sex pyramids are widest for Tampines and Yishun, and narrowest for Newtown and Novena, while the rest are in between. We note that there are some minor exceptions such as Bishan (RCR), Bukit Timah (CCR) and Jurong East (OCR) being quite close to each other due to proportion of residences, but this does not cause the overall trend to deviate greatly.</p>
+<p><strong>(3)</strong> <strong>The Sex distribution seems to be relatively evenly distributed for most age groups (with slightly more females than males) except for those aged 75 and above where the difference is more pronounced.</strong> This could be due to higher life expectancy for females compared to males, which are 85.9 and 81.1 respectively for Singapore residents in 2021.</p>
+<p><strong>(4) For PAs in the RCR and OCR, the largest or second largest age group is 30-34. However, the largest age group for PAs in the CCR is 45-49.</strong> This could be because residences for PAs in CCR are more expensive compared to other market segments and, generally, those aged 45-49 would have higher income and spending power compared to the younger age groups and be able to afford living in the CCR.</p>
+<p><strong>(5) There are signs of a shrinking population, with the age groups within 0 to 19 smaller than the earlier generations, with the exception of those above 70.</strong> The top and bottom ends of the pyramid are the narrowest. This shows that there are fewer young people and we could gradually see an aging population as the baby boomers move into their senior years. Unless the trends are reversed, the Millennials (children of the Baby Boomers) could be the last sizeable age group.</p>
 
 
 </section>
