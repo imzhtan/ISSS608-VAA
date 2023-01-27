@@ -1,7 +1,8 @@
 ---
-title: "Take-home_Ex02"
+title: "Take-home Exercise 02"
 author: "Tan Zhi Hao"
 affiliation: 'SMU MITB'
+date: "`r Sys.Date()`"
 ---
 
 # 1. Overview
@@ -18,6 +19,8 @@ The code chunk below uses p_load() of pacman package to check if tidyverse packa
 
 ```{r}
 pacman::p_load(tidyverse)
+
+library(plotly)
 ```
 
 ## 2.2 Importing the data
@@ -129,6 +132,7 @@ With an x-axis values, it would also be good to include vertical grid lines as t
 -   In the tooltip, unnecessary information is removed. When hovering over 'Females', only the AG, sex and female count is shown and similarly for 'Males'.
 
 ```{r}
+
 AgSxPyr_t9 <- ggplot(t9_only, aes(x = AG, y = Count, fill = Sex)) +
   geom_bar(data = subset(t9_only, 
                          Sex == "Males"), 
