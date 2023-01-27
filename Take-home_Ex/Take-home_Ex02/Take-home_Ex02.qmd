@@ -129,34 +129,6 @@ With an x-axis values, it would also be good to include vertical grid lines as t
 -   In the tooltip, unnecessary information is removed. When hovering over 'Females', only the AG, sex and female count is shown and similarly for 'Males'.
 
 ```{r}
-AgSxPyr_t9 <- ggplot(t9_only, 
-                     aes(x = ifelse(Sex == "Males",
-                                    yes = -Count,
-                                    no = Count),
-               y = AG, 
-               fill = Sex)) +
-  geom_col() +               
-  scale_x_continuous(breaks = seq(-15000, 15000, 5000), 
-                     labels = paste0(
-                       as.character(
-                         c(seq(15, 0, -5), 
-                           seq(5, 15, 5))),
-                       "k")) +
-  labs (x = "Population Count", 
-        y = "Age Group", 
-        title = 'Age-Sex Pyramid in Singapore, 2022') +
-  facet_grid(~ PA) +
-  theme_bw() +
-  theme(axis.ticks.y = element_blank()) +
-  scale_fill_manual(values = c("Males" = "lightblue",
-                               "Females" = "lightpink"))
-  
-ggplotly(AgSxPyr_t9, 
-         session = "knitr")
-
-```
-
-```{r}
 AgSxPyr_t9 <- ggplot(t9_only, aes(x = AG, y = Count, fill = Sex)) +
   geom_bar(data = subset(t9_only, 
                          Sex == "Males"), 
