@@ -16,9 +16,9 @@ editor: visual
 
 # 1. Overview
 
-This exercise is based on a take-home exercise 1 submission prepared by a [classmate](https://public.tableau.com/app/profile/joseph.zexeong.tan/viz/SingaporePopulationPyramindJun2022v1_3/trel3x3_d?publish=yes). The peer submission will be critiqued in terms of clarity and aesthetics, and the original design will be remade using the data visualization principles and best practice learnt in Lesson 1 and 2.
+This exercise is based on a take-home exercise 1 submission prepared by a [classmate](https://public.tableau.com/app/profile/joseph.zexeong.tan/viz/SingaporePopulationPyramindJun2022v1_3/trel3x3_d?publish=yes). The peer submission will be critiqued in terms of clarity and aesthetics, and the original design will be remade using the data visualization principles and best practices learnt in Lessons1 and 2.
 
-The dataset used in take-home exercise 1 and 2 is a CSV file extracted from [Singstat website](https://www.singstat.gov.sg/find-data/search-by-theme/population/geographic-distribution/latest-data) named *'respopagesextod2022'* and processed by RStudio `tidyverse` family of packages and visualized by `ggplot2` and its extensions.
+The dataset used in take-home exercises 1 and 2 is a CSV file extracted from [Singstat website](https://www.singstat.gov.sg/find-data/search-by-theme/population/geographic-distribution/latest-data) named *'respopagesextod2022'* and processed by RStudio `tidyverse` family of packages and visualized by `ggplot2` and its extensions.
 
 # 2. Preparation
 
@@ -34,7 +34,7 @@ library(plotly)
 
 ## 2.2 Importing the data
 
-The code chunk below imports respopagesextod2022.csv from the data folder into R by using read_csv() of readr and save it as an tibble data frame called data.
+The code chunk below imports respopagesextod2022.csv from the data folder into R by using read_csv() of readr and save it as an tibble data frame called pop_data.
 
 ```{r}
 pop_data <- read_csv("data/respopagesextod2022.csv")
@@ -46,8 +46,7 @@ head(pop_data)
 The code chunk below orders the Age groups sequentially, by planning area, age group and sex.
 
 ```{r}
-pop_data$AG <- gsub("_", 
-                    " ", 
+pop_data$AG <- gsub("_", " ", 
                     pop_data$AG, 
                     fixed = TRUE)
 
@@ -88,7 +87,7 @@ head(t9_only)
 
 ## 3.1 Critique of Grid Facet to Display Population Pyramids in a Row
 
-![Figure 1: Original design by classmate row Trellis](images/image-133158159.png)
+![*Figure 1: Original design by classmate row Trellis*](images/image-133158159.png)
 
 ### 3.1.1 Critique
 
@@ -104,15 +103,15 @@ head(t9_only)
 
 \(A\) Title\
 \
-**The title does not provide sufficient detail about the data being visualized**. It simply states 'Compare the Feasibility for Visual Analysis by Two Trellis Layouts of 9 Population Pyramids'. It does not say the data is for which country's population and for which year. A more appropriate title will be 'Age-Sex Pyramid for Selected Planning Areas in Singapore, 2022'
+**The title does not provide sufficient detail about the data being visualized**. It simply states 'Compare the Feasibility for Visual Analysis by Two Trellis Layouts of 9 Population Pyramids'. It does not tell us the data is for which country's population and for which year. A more appropriate title will be 'Age-Sex Pyramid in Singapore, 2022'
 
 \(B\) Axes
 
-**The x-axis does not have a label telling us what is the information being shown. It is also not shown even at the bottom of the dashboard**. The legend at the bottom shows us which color represents which sex but it is insufficient to tell us is this a count or proportion, nor does it tell us the units. In general, if the word 'count' is used (e.g. Male Count), this tells us it is a number.
+**The x-axis does not have a label telling us what is the information being shown. It is also not shown at the bottom of the dashboard**. The legend at the bottom shows us which color represents which sex but it is insufficient to tell us is this a count or proportion, nor does it tell us the units. In general, if the word 'count' is used (e.g. Male Count), this tells us it is a number.
 
 \(C\) Grid
 
-With an x-axis values, it would also be good to include vertical grid lines as the x-axis is in continuous numbers.
+With an x-axis values, it would also be good to include vertical grid lines as the x-axis values are in continuous numbers.
 
 #### 3.1.1.2 Aesthetics
 
@@ -120,13 +119,13 @@ With an x-axis values, it would also be good to include vertical grid lines as t
 
 \(A\) Colour\
 \
-**The colors used to represent Male and Female are not intuitive.** By convention, Blue is used to represent Male and Red/Pink is used to represent Female. Of course, this is only based on convention and not a hard rule, but for people who are used to the conventional colors, at first glance, we may think that the right side of the pyramids are representing Males.
+**The colors used to represent Male and Female are not intuitive.** By convention, Blue is used to represent Male and Red/Pink is used to represent Female. Of course, this is only based on convention and not a hard rule, but for people who are used to the conventional colors, at first glance, we may think that the right side of the pyramids are representing Males, but it is actually representing Females.
 
-**The horizontal alternating color shading (i.e. grey-white-grey-white) does not seem to be necessary** as the age groups are in 'discrete horizontal bars' and not 'continuous'. The alternating shading also seem to be missing for the left side of each pyramid, which may be distracting.
+**The horizontal alternating color shading (i.e. grey-white-grey-white) in the background does not seem to be necessary** as the age groups are grouped as 'discrete horizontal bars' and not 'continuous'. The alternating shading also seem to be missing for the left side of each pyramid, which may be distracting.
 
 \(B\) Data labels
 
-**The labels for the count being displayed overlapping the bars can make the charts very messy.** It may also be hard to read the numbers for the top of the pyramid where the bars are short. Some solutions are to either display the numbers outside the bar (non-overlapping), change the numbers to thousands using 'k', or not display the numbers at all since there is already a tooltip displaying information as you hover over the bars.
+**The labels for the count being displayed overlapping the bars can make the charts very messy.** It may also be hard to read the numbers for the top of the pyramids where the bars are short. Some solutions are to either display the numbers outside the bar (non-overlapping), change the numbers to thousands using 'k', and the best would be not to display the numbers at all since there is already a tooltip displaying information as you hover over the bars.
 
 ### 3.1.2 Remake
 
@@ -134,15 +133,15 @@ With an x-axis values, it would also be good to include vertical grid lines as t
 
 -   Added a x-axis label 'Population Count' as well as the x-axis values of up to 15k on each side in steps of 5k as well as grid lines for more clarity.
 
--   Changed the colors of the bars to Blue for 'Males' and Pink for 'Females'. Removed alternating shading.
+-   Changed the colors of the bars to Blue for 'Males' and Pink for 'Females'. Removed alternating background shading.
 
 -   Removed count value label display for each bar.
 
--   In the tooltip, unnecessary information is removed. When hovering over 'Females', only the AG, sex and female count is shown and similarly for 'Males'.
+-   In the tooltip, unnecessary information is removed. When hovering over 'Females', only the AG, sex and count for Females are shown and similarly for 'Males'.
 
 ```{r}
 
-AgSxPyr_t9 <- ggplot(t9_only, aes(x = AG, y = Count, fill = Sex)) +
+AgSxPyr_t9_row <- ggplot(t9_only, aes(x = AG, y = Count, fill = Sex)) +
   geom_bar(data = subset(t9_only, 
                          Sex == "Males"), 
            aes(x = AG, 
@@ -166,30 +165,30 @@ AgSxPyr_t9 <- ggplot(t9_only, aes(x = AG, y = Count, fill = Sex)) +
   coord_flip() +
   facet_grid(~ PA) +
   labs (y = "Population Count", 
-        x = "Age Group", 
+        x = "Age Group (AG)", 
         title = 'Age-Sex Pyramid in Singapore, 2022') +
   theme_bw() +
   theme(axis.ticks.y = element_blank()) +
   scale_fill_manual(values = c("Males" = "lightblue", 
                                "Females" = "lightpink")) 
 
-ggplotly(AgSxPyr_t9, 
+ggplotly(AgSxPyr_t9_row, 
          session = "knitr")
 ```
 
 ## 3.2 Critique of Wrap Facet to Display Population Pyramids 3 by 3 Matrix
 
-![Figure 2: Original design by classmate 3x3 Trellis](images/image-1481469006.png)
+![*Figure 2: Original design by classmate 3x3 Trellis*](images/image-1481469006.png)
 
 ### 3.2.1 Critique
 
 #### 3.2.1.1 Clarity
 
-What works and doesn't work in point 3.1.1.1 for the Grid Facet in a row all apply to this 3x3 Trellis as well.
+What works and doesn't work in point 3.1.1.1 for the 'Grid Facet in a row' all apply to this 3x3 Trellis as well.
 
 #### 3.2.1.2 Aesthetics
 
-What works and doesn't work in point 3.1.1.2 for the Grid Facet in a row all apply to this 3x3 Trellis as well.
+What works and doesn't work in point 3.1.1.2 for the 'Grid Facet in a row' all apply to this 3x3 Trellis as well.
 
 In addition, **it would be good to remove unnecessary information to avoid confusion in the tooltip** such as the 'Column along PA' and 'Row along PA'. We can also remove 'Male Population' when hovering over Female and remove 'Female Population' when hovering over 'Male'
 
@@ -199,16 +198,22 @@ In addition, **it would be good to remove unnecessary information to avoid confu
 
 -   Added a x-axis label 'Population Count' as well as the x-axis values of up to 15k on each side in steps of 5k as well as grid lines for more clarity.
 
--   Changed the colors of the bars to Blue for 'Males' and Pink for 'Females'. Removed alternating shading.
+-   Changed the colors of the bars to Blue for 'Males' and Pink for 'Females'. Removed alternating horizontal shading.
 
 -   Removed count value label display for each bar.
 
--   In the tooltip, unnecessary information is removed. 'Column along PA' and 'Row along PA' are removed. When hovering over 'Females', only the AG, sex and female count is shown and similarly for 'Males'.
+-   In the tooltip, unnecessary information is removed. 'Column along PA' and 'Row along PA' are removed. When hovering over 'Females', only the AG, sex and count for Females are shown and similarly for 'Males'.
 
--   The labels for Planning Area are now at the middle top of each micro chart in the Trellis display.
+-   The labels for Planning Area are now at the middle top of each micro-chart in the Trellis display.
+
+**Sketch of the remake using Powerpoint:**
+
+![](images/image-1105872106.png){width="677"}
+
+**Actual remake using ggplot2, ggplot2 extensions and tidyverse packages:**
 
 ```{r}
-AgSxPyr_t9 <- ggplot(t9_only, aes(x = AG, y = Count, fill = Sex)) +
+AgSxPyr_t9_wrap <- ggplot(t9_only, aes(x = AG, y = Count, fill = Sex)) +
   geom_bar(data = subset(t9_only, 
                          Sex == "Males"), 
            aes(x = AG, 
@@ -232,15 +237,23 @@ AgSxPyr_t9 <- ggplot(t9_only, aes(x = AG, y = Count, fill = Sex)) +
   coord_flip() +
   facet_wrap(~ PA) +
   labs (y = "Population Count", 
-        x = "Age Group", 
+        x = "Age Group (AG)", 
         title = 'Age-Sex Pyramid in Singapore, 2022') +
   theme_bw() +
   theme(axis.ticks.y = element_blank()) +
   scale_fill_manual(values = c("Males" = "lightblue", 
                                "Females" = "lightpink")) 
 
-ggplotly(AgSxPyr_t9, 
+ggplotly(AgSxPyr_t9_wrap, 
          session = "knitr")
 ```
 
 # 4. Learning Points
+
+For take-home exercises 1 & 2, I saw different ways of presenting the Trellis graphs from different classmates, different ways of presentation, colors, labels, titles, etc. Here are my key takeaways:
+
+1.  On clarity, the graphs should be clear on what high-level patterns are being shown. This includes having enough information at first glance to provide clear context (e.g. the title, axis labels and units should tell us what the pattern is about and not misleading).
+
+2.  On aesthetics, minimalist designs which are least distracting are preferable. Unnecessary embellishments should be removed. Colors should be intuitive, information should not be overlapping and difficult to see, low level details should only appear on demand.
+
+3.  Overall, the graphs should follow Shneiderman's mantra: "Overview first, zoom and filter, then details-on-demand".
