@@ -2,7 +2,11 @@
 title: "Take-home Exercise 02"
 author: "Tan Zhi Hao"
 affiliation: 'SMU MITB'
-date: "`r Sys.Date()`"
+date: 27 Jan 2023
+date modified: "`r Sys.Date()`"
+format:
+  html: 
+    code-fold: true
 ---
 
 # 1. Overview
@@ -127,7 +131,7 @@ With an x-axis values, it would also be good to include vertical grid lines as t
 
 -   Changed the colors of the bars to Blue for 'Males' and Pink for 'Females'. Removed alternating shading.
 
--   Removed count value display for each bar.
+-   Removed count value label display for each bar.
 
 -   In the tooltip, unnecessary information is removed. When hovering over 'Females', only the AG, sex and female count is shown and similarly for 'Males'.
 
@@ -176,37 +180,27 @@ ggplotly(AgSxPyr_t9,
 
 #### 3.2.1.1 Clarity
 
-***What doesn't work and why:***
-
-\(A\) Title\
-\
-**Same as point 3.1.1.1**
-
-\(B\) Axes
-
-**Same as point 3.1.1.1**
-
-\(B\) Grid
-
-**Same as point 3.1.1.1**
+What works and doesn't work in point 3.1.1.1 for the Grid Facet in a row all apply to this 3x3 Trellis as well.
 
 #### 3.2.1.2 Aesthetics
 
-***What doesn't work and why:***
+What works and doesn't work in point 3.1.1.2 for the Grid Facet in a row all apply to this 3x3 Trellis as well.
 
-\(A\) Colour\
-\
-**Same as point 3.1.1.2**
-
-\(B\) Data labels
-
-**Same as point 3.1.1.1**
-
-\(C\) Tooltip
-
-**It would be good to remove unnecessary information to avoid confusion in the tooltip** such as the 'Column along PA' and 'Row along PA'. We can also remove 'Male Population' when hovering over Female and remove 'Female Population' when hovering over 'Male'
+In addition, **it would be good to remove unnecessary information to avoid confusion in the tooltip** such as the 'Column along PA' and 'Row along PA'. We can also remove 'Male Population' when hovering over Female and remove 'Female Population' when hovering over 'Male'
 
 ### 3.2.2 Remake
+
+-   Changed title to 'Age-Sex Pyramid in Singapore, 2022'.
+
+-   Added a x-axis label 'Population Count' as well as the x-axis values of up to 15k on each side in steps of 5k as well as grid lines for more clarity.
+
+-   Changed the colors of the bars to Blue for 'Males' and Pink for 'Females'. Removed alternating shading.
+
+-   Removed count value label display for each bar.
+
+-   In the tooltip, unnecessary information is removed. 'Column along PA' and 'Row along PA' are removed. When hovering over 'Females', only the AG, sex and female count is shown and similarly for 'Males'.
+
+-   The labels for Planning Area are now at the middle top of each micro chart in the Trellis display.
 
 ```{r}
 AgSxPyr_t9 <- ggplot(t9_only, aes(x = AG, y = Count, fill = Sex)) +
@@ -243,3 +237,5 @@ AgSxPyr_t9 <- ggplot(t9_only, aes(x = AG, y = Count, fill = Sex)) +
 ggplotly(AgSxPyr_t9, 
          session = "knitr")
 ```
+
+# 4. Learning Points
