@@ -1,0 +1,23 @@
+---
+title: "Take-home Exercise 03"
+author: "Tan Zhi Hao"
+affiliation: 'SMU MITB'
+date: 6 February 2023
+date-modified: "`r Sys.Date()`"
+execute: 
+  echo: true
+  eval: true
+  warning: false
+format:
+  html: 
+    code-fold: true
+editor: visual
+---
+
+# 1. Introduction
+
+In this take-home exercise, I will uncover the salient patterns of the resale prices of public housing property by residential towns and estates in Singapore by using appropriate analytical visualisation techniques learned in Lesson 4: Fundamentals of Visual Analytics. Students are encouraged to apply appropriate interactive techniques to enhance user and data discovery experiences.
+
+For the purpose of this study, the focus will be on **3-ROOM, 4-ROOM and 5-ROOM types**. You can choose to focus on either one housing type or multiple housing types. The study period will be on **2022**.
+
+*Resale flat princes based on registration date from Jan-2017 onwards* from [Data.gov.sg](https://data.gov.sg/) will be used to prepare the analytical visualisation and processed by RStudio `tidyverse` family of packages and visualized by `ggplot2` and its extensions.
