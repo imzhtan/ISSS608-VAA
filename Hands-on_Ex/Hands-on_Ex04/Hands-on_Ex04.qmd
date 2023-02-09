@@ -137,3 +137,267 @@ plot(parameters(model1))
 ggcoefstats(model1,
             output = "plot")
 ```
+
+```{r}
+pacman::p_load(tidyverse, plotly, crosstalk, DT, ggdist, gganimate, gifski, gapminder)
+```
+
+```{r}
+exam <- read_csv("data/Exam_data.csv")
+```
+
+```{r}
+my_sum <- exam %>%
+  group_by(RACE) %>%
+  summarise(
+    n=n(),
+    mean=mean(MATHS),
+    sd=sd(MATHS),
+    lci = t.test(MATHS, conf.level = 0.95)$conf.int[1],
+    uci = t.test(MATHS, conf.level = 0.95)$conf.int[2]
+  ) %>%
+  mutate(se=sd/sqrt(n-1))
+```
+
+```{r}
+knitr::kable(head(my_sum), format = 'html')
+```
+
+```{r}
+ggplot(my_sum) +
+  geom_errorbar(
+    aes(x=RACE,
+        ymin=mean-se,
+        ymax=mean+se),
+    width=0.2,
+    colour='black',
+    alpha=0.9,
+    size=0.5) +
+  geom_point(aes
+            (x=RACE,
+            y=mean),
+            stat = "identity",
+            color = "red",
+            size = 1.5,
+            alpha = 1) +
+  ggtitle("Standard error of mean maths score by race")
+```
+
+```{r}
+ggplot(my_sum) +
+  geom_errorbar(
+    aes(x=RACE,
+        ymin=lci,
+        ymax=uci),
+    width=0.2,
+    colour='black',
+    alpha=0.9,
+    size=0.5) +
+  geom_point(aes
+            (x=RACE,
+            y=mean),
+            stat = "identity",
+            color = "red",
+            size = 1.5,
+            alpha = 1) +
+  ggtitle("95% confidence interval of mean maths score by race")
+```
+
+```{r}
+exam %>%
+  ggplot(aes(x = RACE,
+             y = MATHS)) +
+  stat_pointinterval() +
+  labs(
+    title = "Visualising confidence intervals of mean math score", subtitle = "Mean Point + Multuple-interval plot"
+  )
+```
+
+```{r}
+exam %>%
+  ggplot(aes(x = RACE, y=MATHS)) +
+  stat_pointinterval(.width = 0.95,
+                     .point = median,
+                     .interval = qi) +
+  labs(
+    title = "Visualising confidence intervals of mean math score", subtitle = "Mean Point + Multiple-interval plot")
+```
+
+```{r}
+exam %>%
+  ggplot(aes(x = RACE, 
+             y = MATHS)) +
+  stat_pointinterval(
+    show.legend = FALSE) +   
+  labs(
+    title = "Visualising confidence intervals of mean math score",
+    subtitle = "Mean Point + Multiple-interval plot")
+```
+
+```{r}
+exam %>%
+  ggplot(aes(x = RACE, 
+             y = MATHS)) +
+  stat_gradientinterval(   
+    fill = "skyblue",      
+    show.legend = TRUE     
+  ) +                        
+  labs(
+    title = "Visualising confidence intervals of mean math score",
+    subtitle = "Gradient + interval plot")
+```
+
+```{r}
+devtools::install_github("wilkelab/ungeviz")
+```
+
+```{r}
+library(ungeviz)
+```
+
+```{r}
+ggplot(data = exam, 
+       (aes(x = factor(RACE), y = MATHS))) +
+  geom_point(position = position_jitter(
+    height = 0.3, width = 0.05), 
+    size = 0.4, color = "#0072B2", alpha = 1/2) +
+  geom_hpline(data = sampler(25, group = RACE), height = 0.6, color = "#D55E00") +
+  theme_bw() + 
+  # `.draw` is a generated column indicating the sample draw
+  transition_states(.draw, 1, 3)
+```
+
+```{r}
+ggplot(data = exam, 
+       (aes(x = factor(RACE), 
+            y = MATHS))) +
+  geom_point(position = position_jitter(
+    height = 0.3, 
+    width = 0.05), 
+    size = 0.4, 
+    color = "#0072B2", 
+    alpha = 1/2) +
+  geom_hpline(data = sampler(25, 
+                             group = RACE), 
+              height = 0.6, 
+              color = "#D55E00") +
+  theme_bw() + 
+  transition_states(.draw, 1, 3)
+```
+
+```{r}
+pacman::p_load(tidyverse, FunnelPlotR, plotly, knitr)
+```
+
+```{r}
+covid19 <- read_csv("data/COVID-19_DKI_Jakarta.csv") %>%
+  mutate_if(is.character, as.factor)
+```
+
+```{r}
+funnel_plot(
+  numerator = covid19$Positive,
+  denominator = covid19$Death,
+  group = covid19$`Sub-district`
+)
+```
+
+```{r}
+funnel_plot(
+  numerator = covid19$Death,
+  denominator = covid19$Positive,
+  group = covid19$`Sub-district`,
+  data_type = "PR",
+  xrange = c(0, 6500),
+  yrange = c(0, 0.05)
+)
+```
+
+```{r}
+funnel_plot(
+  numerator = covid19$Death,
+  denominator = covid19$Positive,
+  group = covid19$`Sub-district`,
+  data_type = "PR",   
+  xrange = c(0, 6500),  
+  yrange = c(0, 0.05),
+  label = NA,
+  title = "Cumulative COVID-19 Fatality Rate by Cumulative Total Number of COVID-19 Positive Cases", #<<           
+  x_label = "Cumulative COVID-19 Positive Cases", #<<
+  y_label = "Cumulative Fatality Rate"  #<<
+)
+```
+
+```{r}
+df <-  covid19 %>%
+  mutate(rate = Death / Positive) %>%
+  mutate(rate.se = sqrt((rate*(1-rate)) / (Positive))) %>%
+  filter(rate > 0)
+```
+
+```{r}
+fit.mean <- weighted.mean(df$rate, 1/df$rate.se^2)
+```
+
+```{r}
+number.seq <- seq(1, max(df$Positive), 1)
+number.ll95 <- fit.mean - 1.96 * sqrt((fit.mean*(1-fit.mean)) / (number.seq)) 
+number.ul95 <- fit.mean + 1.96 * sqrt((fit.mean*(1-fit.mean)) / (number.seq)) 
+number.ll999 <- fit.mean - 3.29 * sqrt((fit.mean*(1-fit.mean)) / (number.seq)) 
+number.ul999 <- fit.mean + 3.29 * sqrt((fit.mean*(1-fit.mean)) / (number.seq)) 
+dfCI <- data.frame(number.ll95, number.ul95, number.ll999, number.ul999, number.seq, fit.mean)
+```
+
+```{r}
+p <- ggplot(df, aes(x = Positive, y = rate)) +
+  geom_point(aes(label=`Sub-district`), 
+             alpha=0.4) +
+  geom_line(data = dfCI, 
+            aes(x = number.seq, 
+                y = number.ll95), 
+            size = 0.4, 
+            colour = "grey40", 
+            linetype = "dashed") +
+  geom_line(data = dfCI, 
+            aes(x = number.seq, 
+                y = number.ul95), 
+            size = 0.4, 
+            colour = "grey40", 
+            linetype = "dashed") +
+  geom_line(data = dfCI, 
+            aes(x = number.seq, 
+                y = number.ll999), 
+            size = 0.4, 
+            colour = "grey40") +
+  geom_line(data = dfCI, 
+            aes(x = number.seq, 
+                y = number.ul999), 
+            size = 0.4, 
+            colour = "grey40") +
+  geom_hline(data = dfCI, 
+             aes(yintercept = fit.mean), 
+             size = 0.4, 
+             colour = "grey40") +
+  coord_cartesian(ylim=c(0,0.05)) +
+  annotate("text", x = 1, y = -0.13, label = "95%", size = 3, colour = "grey40") + 
+  annotate("text", x = 4.5, y = -0.18, label = "99%", size = 3, colour = "grey40") + 
+  ggtitle("Cumulative Fatality Rate by Cumulative Number of COVID-19 Cases") +
+  xlab("Cumulative Number of COVID-19 Cases") + 
+  ylab("Cumulative Fatality Rate") +
+  theme_light() +
+  theme(plot.title = element_text(size=12),
+        legend.position = c(0.91,0.85), 
+        legend.title = element_text(size=7),
+        legend.text = element_text(size=7),
+        legend.background = element_rect(colour = "grey60", linetype = "dotted"),
+        legend.key.height = unit(0.3, "cm"))
+p
+```
+
+```{r}
+fp_ggplotly <- ggplotly(p,
+  tooltip = c("label", 
+              "x", 
+              "y"))
+fp_ggplotly
+```
