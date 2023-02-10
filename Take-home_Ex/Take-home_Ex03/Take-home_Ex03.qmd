@@ -21,3 +21,57 @@ In this take-home exercise, I will uncover the salient patterns of the resale pr
 For the purpose of this study, the focus will be on **3-ROOM, 4-ROOM and 5-ROOM types**. You can choose to focus on either one housing type or multiple housing types. The study period will be on **2022**.
 
 *Resale flat princes based on registration date from Jan-2017 onwards* from [Data.gov.sg](https://data.gov.sg/) will be used to prepare the analytical visualisation and processed by RStudio `tidyverse` family of packages and visualized by `ggplot2` and its extensions.
+
+# 2. Preparation
+
+## 2.1 Install and launching R packages
+
+The code chunk below uses p_load() of pacman package to check if the various packages used for the visual analysis are installed in the computer. If they are, then they will be launched into R.
+
+```{r}
+pacman::p_load(ggstatsplot, tidyverse, readxl, performance, parameters, see, plotly, crosstalk, DT, ggdist, gganimate, gifski, gapminder)
+
+library(plotly)
+```
+
+## 2.2 Importing the data
+
+The code chunk below imports resale-flat-prices-based-on-registration-date-from-jan-2017-onwards.csv from the data folder into R by using read_csv() of readr and save it as an tibble data frame called resale_data.
+
+```{r}
+resale_data <- read_csv("data/resale-flat-prices-based-on-registration-date-from-jan-2017-onwards.csv")
+
+head(resale_data)
+```
+
+## 2.3 Data wrangling
+
+The code chunk below filters for 3, 4 and 5 room flat types and for year 2022.
+
+```{r}
+resale_data_filter <- resale_data %>%
+  separate(month, into = c("year", "month"), sep = "-") %>%
+  filter(year == "2022") %>%
+  filter(flat_type %in% c("3 ROOM", "4 ROOM", "5 ROOM"))
+
+head(resale_data_filter)
+```
+
+The code chunk below converts the remaining lease from months and years in the character datatype to years in the double datatype.
+
+```{r}
+resale_data1 <- resale_data_filter %>%
+separate(remaining_lease, into = c("years", "months"), sep = " years ") %>%
+ separate(years, into = c("years", "test1"), sep = " ") %>%
+  separate(months, into = c("months", "test2"), sep = " ") %>%
+  transform(years = as.numeric(years)) %>%
+  transform(months = as.numeric(months)) %>%
+  replace(is.na(.), 0) %>%
+  transform(rem_lease_inyears = years + (months / 12))
+  
+resale_data_clean <- subset(resale_data1, select = -c(test1, test2))
+
+head(resale_data_clean)
+```
+
+# 3. Analytical visualization and procedure
