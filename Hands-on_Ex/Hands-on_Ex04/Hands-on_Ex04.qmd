@@ -12,7 +12,7 @@ editor: visual
 ---
 
 ```{r}
-pacman::p_load(ggstatsplot, tidyverse)
+pacman::p_load(ggstatsplot, tidyverse, tidyverse,plotly, crosstalk, DT, ggdist, gganimate, gifski, gapminder, FunnelPlotR, plotly, knitr)
 ```
 
 ```{r}
@@ -136,10 +136,6 @@ plot(parameters(model1))
 ```{r}
 ggcoefstats(model1,
             output = "plot")
-```
-
-```{r}
-pacman::p_load(tidyverse, plotly, crosstalk, DT, ggdist, gganimate, gifski, gapminder)
 ```
 
 ```{r}
@@ -283,10 +279,6 @@ ggplot(data = exam,
               color = "#D55E00") +
   theme_bw() + 
   transition_states(.draw, 1, 3)
-```
-
-```{r}
-pacman::p_load(tidyverse, FunnelPlotR, plotly, knitr)
 ```
 
 ```{r}
