@@ -29,6 +29,8 @@ website:
           href: "In-class_Ex/In-class_Ex03/In-class_Ex03.html"
         - text: "In-class Exercise 4 - Fundamentals of Visual Analytics"
           href: "In-class_Ex/In-class_Ex04/In-class_Ex04.html"
+        - text: "In-class Exercise 5 - Visual Multivariate Analysis"
+          href: "In-class_Ex/In-class_Ex05/In-class_Ex05.html" 
     right:
       - href: index.qmd
         text: Home
