@@ -16,15 +16,15 @@ editor: visual
 
 # 1. Introduction
 
-In this take-home exercise, I will uncover the salient patterns of the resale prices of public housing property by residential towns and estates in Singapore by using appropriate analytical visualisation techniques learned in Lesson 4: Fundamentals of Visual Analytics. Students are encouraged to apply appropriate interactive techniques to enhance user and data discovery experiences.
+In this take-home exercise, I will uncover the salient patterns of the resale prices of public housing property by residential towns in Singapore by using appropriate analytical visualisation techniques learned in Lesson 4: Fundamentals of Visual Analytics.
 
-For the purpose of this study, the focus will be on **3-ROOM, 4-ROOM and 5-ROOM types**. You can choose to focus on either one housing type or multiple housing types. The study period will be on **2022**.
+For the purpose of this study, the focus will be on 3-ROOM, 4-ROOM and 5-ROOM types. The study period will be on 2022.
 
-*Resale flat princes based on registration date from Jan-2017 onwards* from [Data.gov.sg](https://data.gov.sg/) will be used to prepare the analytical visualisation and processed by RStudio `tidyverse` family of packages and visualized by `ggplot2` and its extensions.
+*Resale flat princes based on registration date from Jan-2017 onwards* from [Data.gov.sg](https://data.gov.sg/) will be used to prepare the analytical visualisation and processed by RStudio `tidyverse` family of packages and visualized by `ggplot2` and its extensions as well as other R packages.
 
 # 2. Preparation
 
-## 2.1 Install and launching R packages
+## 2.1 Installing and launching R packages
 
 The code chunk below uses p_load() of pacman package to check if the various packages used for the visual analysis are installed in the computer. If they are, then they will be launched into R.
 
@@ -34,9 +34,11 @@ pacman::p_load(ggstatsplot, tidyverse, readxl, performance, parameters, see, plo
 library(plotly)
 ```
 
+![](data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACgAAAAaCAYAAADFTB7LAAAAa0lEQVR42u3OywnAIBBAwcXSUoCW5D11xDoNCBGNv0MOecJOBSOi1OZMsJ4dvFxEJ1OQnMxBarIKEpNNkJbsBknJYZCSnAYJyVVQziNig7/nZkFEbhTE5HpBVO4dxOXKIDL3BLG5BJ1T6rsbMfep2CaMN00AAAAASUVORK5CYII= "Run Current Chunk")
+
 ## 2.2 Importing the data
 
-The code chunk below imports resale-flat-prices-based-on-registration-date-from-jan-2017-onwards.csv from the data folder into R by using read_csv() of readr and save it as an tibble data frame called resale_data.
+The code chunk below imports *resale-flat-prices-based-on-registration-date-from-jan-2017-onwards.csv* from the data folder into R by using read_csv() of readr and save it as an tibble data frame called resale_data.
 
 ```{r}
 resale_data <- read_csv("data/resale-flat-prices-based-on-registration-date-from-jan-2017-onwards.csv")
@@ -46,7 +48,11 @@ head(resale_data)
 
 ## 2.3 Data wrangling
 
+### a) Filtering
+
 The code chunk below filters for 3, 4 and 5 room flat types and for year 2022.
+
+![](data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACgAAAAaCAYAAADFTB7LAAAAa0lEQVR42u3OywnAIBBAwcXSUoCW5D11xDoNCBGNv0MOecJOBSOi1OZMsJ4dvFxEJ1OQnMxBarIKEpNNkJbsBknJYZCSnAYJyVVQziNig7/nZkFEbhTE5HpBVO4dxOXKIDL3BLG5BJ1T6rsbMfep2CaMN00AAAAASUVORK5CYII= "Run Current Chunk")
 
 ```{r}
 resale_data_filter <- resale_data %>%
@@ -57,21 +63,323 @@ resale_data_filter <- resale_data %>%
 head(resale_data_filter)
 ```
 
-The code chunk below converts the remaining lease from months and years in the character datatype to years in the double datatype.
+### b) Converting variable and datatype
+
+The code chunk below converts the remaining lease from months and years (in the character datatype) to months (in the numeric datatype).
 
 ```{r}
-resale_data1 <- resale_data_filter %>%
+resale_data_lease1 <- resale_data_filter %>%
 separate(remaining_lease, into = c("years", "months"), sep = " years ") %>%
  separate(years, into = c("years", "test1"), sep = " ") %>%
   separate(months, into = c("months", "test2"), sep = " ") %>%
   transform(years = as.numeric(years)) %>%
   transform(months = as.numeric(months)) %>%
   replace(is.na(.), 0) %>%
-  transform(rem_lease_inyears = years + (months / 12))
+  transform(rem_lease_inmonths = months + (years * 12))
   
-resale_data_clean <- subset(resale_data1, select = -c(test1, test2))
+resale_data_lease <- subset(resale_data_lease1, select = -c(test1, test2))
 
-head(resale_data_clean)
+head(resale_data_lease)
 ```
 
-# 3. Analytical visualization and procedure
+### c) Ordering
+
+![](data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACgAAAAaCAYAAADFTB7LAAAAa0lEQVR42u3OywnAIBBAwcXSUoCW5D11xDoNCBGNv0MOecJOBSOi1OZMsJ4dvFxEJ1OQnMxBarIKEpNNkJbsBknJYZCSnAYJyVVQziNig7/nZkFEbhTE5HpBVO4dxOXKIDL3BLG5BJ1T6rsbMfep2CaMN00AAAAASUVORK5CYII= "Run Current Chunk")
+
+The code chunk below changes the storey range into a factor variable such that it's ordered.
+
+```{r}
+storey_order <- c("01 TO 03", "04 TO 06", "07 TO 09", "10 TO 12", "13 TO 15", "16 TO 18", "19 TO 21", "22 TO 24", "25 TO 27", "28 TO 30", "31 TO 33", "34 TO 36", "37 TO 39", "40 TO 42", "43 TO 45", "46 TO 48", "49 TO 51")
+
+resale_data_order <- resale_data_lease %>% 
+  mutate(`storey_range` = factor(storey_range, levels = storey_order))
+
+head(resale_data_order)
+```
+
+### d) Deriving new variables
+
+The code chunk below creates a new variable price per square feet (psf), which is commonly used to compare the price of houses of different sizes. I did this by dividing total resale price by floor area (converted from meters to feet by multiplying by 10.7639).
+
+```{r}
+resale_data_psf <- resale_data_order %>%
+  mutate(`psf` = as.integer(round(resale_price/(floor_area_sqm * 10.7639), 2)))
+
+head(resale_data_psf)
+```
+
+### e) Re-coding variables
+
+The code chunks below visualizes the town distribution.
+
+```{r}
+ggplot(data = resale_data_psf,
+       aes(y = town)) +
+  geom_bar() +
+  theme_bw() +  
+  ggtitle("Town distribution")
+```
+
+The code chunk below recodes the town variable into [3 market segments](https://www.propertyguru.com.sg/property-guides/ccr-ocr-rcr-region-singapore-ura-map-21045) as defined by the Urban Redevelopment Authority (URA); Core Central Region (CCR), Rest of Central Region (RCR) and Outside Central Region (OCR).
+
+```{r}
+CCR <- c("CENTRAL AREA", "BUKIT TIMAH")
+RCR <- c("TOA PAYOH", "QUEENSTOWN", "MARINE PARADE", "KALLANG/WHAMPOA", "GEYLANG","BISHAN")
+OCR <- c("YISHUN", "WOODLANDS", "TAMPINES", "SERANGOON", "SENGKANG", "SEMBAWANG", "PUNGGOL", "PASIR RIS", "JURONG WEST", "JURONG EAST", "HOUGANG", "CLEMENTI", "CHOA CHU KANG", "BUKIT PANJANG", "BUKIT MERAH", "BUKIT BATOK", "BEDOK", "ANG MO KIO")
+
+resale_data_final <- resale_data_psf %>%
+  mutate(market_segment = recode(town, 
+  "CENTRAL AREA" = "Core Central Region",
+  "BUKIT TIMAH" = "Core Central Region",
+  "TOA PAYOH" = "Rest of Central Region",
+  "QUEENSTOWN" = "Rest of Central Region",
+  "MARINE PARADE" = "Rest of Central Region",
+  "KALLANG/WHAMPOA" = "Rest of Central Region",
+  "GEYLANG" = "Rest of Central Region",
+  "BISHAN" = "Rest of Central Region",
+  "YISHUN" = "Outside Central Region",
+  "WOODLANDS" = "Outside Central Region",
+  "TAMPINES" = "Outside Central Region",
+  "SERANGOON" = "Outside Central Region",
+  "SENGKANG" = "Outside Central Region",
+  "SEMBAWANG" = "Outside Central Region",
+  "PUNGGOL" = "Outside Central Region",
+  "PASIR RIS" = "Outside Central Region",
+  "JURONG WEST" = "Outside Central Region",
+  "JURONG EAST" = "Outside Central Region",
+  "HOUGANG" = "Outside Central Region",
+  "CLEMENTI" = "Outside Central Region",
+  "CHOA CHU KANG" = "Outside Central Region",
+  "BUKIT PANJANG" = "Outside Central Region",
+  "BUKIT MERAH" = "Outside Central Region",
+  "BUKIT BATOK" = "Outside Central Region",
+  "BEDOK" = "Outside Central Region",
+  "ANG MO KIO" = "Outside Central Region"))
+  
+head(resale_data_final)
+```
+
+The code chunks below visualizes the storey range distribution.
+
+```{r}
+ggplot(data = resale_data_psf,
+       aes(y = storey_range)) +
+  geom_bar() +
+  theme_bw() +  
+  ggtitle("Storey range distribution")
+```
+
+I initially thought of re-coding storey range into 'low', 'middle' and 'high' floor but found that this may not allow a fair comparison as different buildings have different number of storeys. It is difficult to have a standardized definition of 'low', 'middle' and 'high' floor. For some buildings, 10th storey may be considered a high floor, but for other buildings, 10th storey may be the middle floor.
+
+```{r}
+skimr::skim(resale_data_final)
+```
+
+# 3. Analytical visualization
+
+## 3.1 Visual Statistical Analysis
+
+In this section, I attempt to understand the difference in means of prices between different market segments and flat type. To do so, I use the Oneway ANOVA tests, which will show the comparison between means. After which, I attempt to understand the correlation of remaining lease with price, first by using significant test of correlation followed by a multi-linear regression where I include control variables.
+
+### a) Oneway ANOVA Test: *ggbetweenstats()* method
+
+**Price By Market Segment**
+
+In the code chunk below, [*ggbetweenstats()*](https://indrajeetpatil.github.io/ggstatsplot/reference/ggbetweenstats.html) is used to build a visual for One-way ANOVA test on price per square feet (psf) by market segment. The purpose is to test if indeed the price per square feet differs significantly across the 3 market segments. The null hypothesis is that all population means are equal (i.e. no variation in means across the 3 market segments ) while the alternative hypothesis is that at least 1 population mean is different.
+
+```{r}
+ggbetweenstats(
+  data = resale_data_final,
+  x = market_segment, 
+  y = psf,
+  type = "p",
+  mean.ci = TRUE, 
+  pairwise.comparisons = TRUE, 
+  pairwise.display = "s",
+  p.adjust.method = "fdr",
+  messages = FALSE
+)
+```
+
+Analysis:
+
+From the visualization, we can see that the p-value is extremely small (\<0.01). This means that we reject the null hypothesis and say that there is evidence that not all the means are the same and at least 1 mean is different across the 3 market segments, statistically significant at 1% level.
+
+**Price By Flat Type**
+
+In the code chunk below, [*ggbetweenstats()*](https://indrajeetpatil.github.io/ggstatsplot/reference/ggbetweenstats.html) is used to build a visual for One-way ANOVA test on price per square feet (psf) by flat type (3, 4 & 5 Room). The purpose is to test if indeed the psf differs significantly across the flat types. The null hypothesis is that all population means are equal (i.e. no variation in means across the 3 market segments) while the alternative hypothesis is that at least 1 population mean is different.
+
+```{r}
+ggbetweenstats(
+  data = resale_data_final,
+  x = flat_type, 
+  y = psf,
+  type = "p",
+  mean.ci = TRUE, 
+  pairwise.comparisons = TRUE, 
+  pairwise.display = "s",
+  p.adjust.method = "fdr",
+  messages = FALSE
+)
+```
+
+Analysis:
+
+From the visualization, we can see that the p-value is extremely small (\<0.01). This means that we reject the null hypothesis and say that there is evidence that not all the means are the same and at least 1 mean is different across the 3 flat types, statistically significant at 1% level.
+
+We can also see that 4 ROOM flat type has highest mean psf, followed by 3 ROOM then 5 ROOM. It is interesting that 4 ROOM mean psf is actually higher than that of 3 ROOM since we usually expect that the bigger the flat, the lower the psf.
+
+### b) **Significant Test of Correlation: *ggscatterstats()***
+
+In the code chunks below, [*ggscatterstats()*](https://indrajeetpatil.github.io/ggstatsplot/reference/ggscatterstats.html) is used to build a visual for Significant Test of Correlation between remaining lease in months and resale price per sf (psf).
+
+```{r}
+ggscatterstats(
+  data = resale_data_final,
+  x = psf,
+  y = rem_lease_inmonths,
+  marginal = FALSE,
+  )
+```
+
+```{r}
+ggscatterstats(
+  data = resale_data_final,
+  x = rem_lease_inmonths,
+  y = psf,
+  marginal = FALSE,
+  )
+```
+
+Analysis:
+
+There seems to be a statistically significant positive correlation between psf and remaining lease. The higher the remaining lease, the higher the price per square feet. To further support this, we want to include some control variables by having a multi-linear regression model including control variables such as flat type, flat model, market segment and month as shown below.
+
+### c) **Multiple Regression Model using lm()**
+
+The code chunk below is used to calibrate a multiple linear regression model by using *lm()* of Base Stats of . The dependent/Y variable is psf while the independent/X variables are remaining lease, flat type, flat model, market segment and month.
+
+```{r}
+model <- lm(psf ~ rem_lease_inmonths + flat_type + flat_model + market_segment + month, data = resale_data_final)
+
+model
+```
+
+```{r}
+ggcoefstats(model, 
+            output = "plot")
+```
+
+```{r}
+check_collinearity(model)
+```
+
+```{r}
+check_c <- check_collinearity(model)
+plot(check_c)
+```
+
+```{r}
+check_n <- check_normality(model)
+
+plot(check_n)
+```
+
+```{r}
+check_h <- check_heteroscedasticity(model)
+
+plot(check_h)
+```
+
+```{r}
+check_model(model)
+```
+
+Analysis:
+
+After controlling for several variables (i.e. holding them constant), we see that remaining lease still has a statistically significantly positive correlation with price per sf, similar to the findings we found in sub-section b above. In this regression model, we see that for every 1 month increase in remaining lease, psf increases by \$0.46.
+
+There doesn't seem to be multi-collinearity as we can see that the VIFs are \<10. The distribution also seems somewhat normal although heteroscedasticity may not hold true.
+
+## 3.2 Visualizing Uncertainty
+
+In this section, I attempt to visualize uncertainty using standard error of mean of price per sf by flat type. This will enable me to compare the uncertainty of the point estimate.
+
+```{r}
+my_sum <- resale_data_final %>%
+  group_by(flat_type) %>%
+  summarise(
+    n=n(),
+    mean=mean(psf),
+    sd=sd(psf)
+    ) %>%
+  mutate(se=sd/sqrt(n-1))
+```
+
+```{r}
+knitr::kable(head(my_sum), format = 'html')
+```
+
+```{r}
+ggplot(my_sum) +
+  geom_errorbar(
+    aes(x=reorder(flat_type, -mean),
+        ymin=mean-se, 
+        ymax=mean+se), 
+    width=0.2, 
+    colour="black", 
+    alpha=0.9, 
+    size=0.5) +
+  geom_point(aes
+           (x=flat_type, 
+            y=mean), 
+           stat="identity", 
+           color="red",
+           size = 1.5,
+           alpha=1) +
+  ggtitle("Standard error of mean 
+          psf by flat type")
+```
+
+```{r}
+resale_data_final %>%
+  ggplot(aes(x = flat_type, 
+             y = psf)) +
+  stat_pointinterval(
+    show.legend = FALSE) +   
+  labs(
+    title = "Visualising confidence intervals of mean psf",
+    subtitle = "Mean Point + Multiple-interval plot")
+```
+
+```{r}
+devtools::install_github("wilkelab/ungeviz")
+```
+
+```{r}
+library(ungeviz)
+```
+
+```{r}
+ggplot(data = resale_data_final, 
+       (aes(x = factor(flat_type), y = psf))) +
+  geom_point(position = position_jitter(
+    height = 0.3, width = 0.05), 
+    size = 0.4, color = "#0072B2", alpha = 1/2) +
+  geom_hpline(data = sampler(25, group = flat_type), height = 0.6, color = "#D55E00") +
+  theme_bw() + 
+  # `.draw` is a generated column indicating the sample draw
+  transition_states(.draw, 1, 3)
+```
+
+Analysis:
+
+It appears that the Standard Error seems to be very similar between the different flat types. The error bars are about the same height. This shows that the uncertainty of the means are very similar across the flat types and they can be compared.
+
+The confidence intervals seems to overlap between the 3 flat types, which could mean that the mean psf may not be statistically significantly different from each other. However, from the one way ANOVA test in section 3.1, we saw that they are statistically significantly different.
+
+# 4. Learning points and future work
+
+For this assignment, I selected only several cuts of data for visualization. For example, I only conducted the One way Anova tests on psf by the 3 market segments and the 3 flat types. This is so that we can have results that are more scoped and interpret-able. For future work, I can conduct the tests on more more cuts of data.
+
+It was also difficult to include all the variables I would like in the multi-linear regression. Most of them are categorical variables and the interpretation of their correlation coefficients is not useful for my objective of finding correlation between remaining lease and psf. The coefficients on categorical variables shows us the differential effect of that category compared to the omitted category. However, I included them simply as control variables to hold them constant. For future work, we may try to interpret these coefficients.

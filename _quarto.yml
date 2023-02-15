@@ -38,7 +38,7 @@ website:
 
 format:
   html:
-    theme: default
+    theme: Zephyr
     css: styles.css
     toc: true
 

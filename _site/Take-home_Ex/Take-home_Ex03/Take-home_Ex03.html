@@ -233,11 +233,28 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   <li><a href="#introduction" id="toc-introduction" class="nav-link active" data-scroll-target="#introduction">1. Introduction</a></li>
   <li><a href="#preparation" id="toc-preparation" class="nav-link" data-scroll-target="#preparation">2. Preparation</a>
   <ul class="collapse">
-  <li><a href="#install-and-launching-r-packages" id="toc-install-and-launching-r-packages" class="nav-link" data-scroll-target="#install-and-launching-r-packages">2.1 Install and launching R packages</a></li>
+  <li><a href="#installing-and-launching-r-packages" id="toc-installing-and-launching-r-packages" class="nav-link" data-scroll-target="#installing-and-launching-r-packages">2.1 Installing and launching R packages</a></li>
   <li><a href="#importing-the-data" id="toc-importing-the-data" class="nav-link" data-scroll-target="#importing-the-data">2.2 Importing the data</a></li>
-  <li><a href="#data-wrangling" id="toc-data-wrangling" class="nav-link" data-scroll-target="#data-wrangling">2.3 Data wrangling</a></li>
+  <li><a href="#data-wrangling" id="toc-data-wrangling" class="nav-link" data-scroll-target="#data-wrangling">2.3 Data wrangling</a>
+  <ul class="collapse">
+  <li><a href="#a-filtering" id="toc-a-filtering" class="nav-link" data-scroll-target="#a-filtering">a) Filtering</a></li>
+  <li><a href="#b-converting-variable-and-datatype" id="toc-b-converting-variable-and-datatype" class="nav-link" data-scroll-target="#b-converting-variable-and-datatype">b) Converting variable and datatype</a></li>
+  <li><a href="#c-ordering" id="toc-c-ordering" class="nav-link" data-scroll-target="#c-ordering">c) Ordering</a></li>
+  <li><a href="#d-deriving-new-variables" id="toc-d-deriving-new-variables" class="nav-link" data-scroll-target="#d-deriving-new-variables">d) Deriving new variables</a></li>
+  <li><a href="#e-re-coding-variables" id="toc-e-re-coding-variables" class="nav-link" data-scroll-target="#e-re-coding-variables">e) Re-coding variables</a></li>
   </ul></li>
-  <li><a href="#analytical-visualization-and-procedure" id="toc-analytical-visualization-and-procedure" class="nav-link" data-scroll-target="#analytical-visualization-and-procedure">3. Analytical visualization and procedure</a></li>
+  </ul></li>
+  <li><a href="#analytical-visualization" id="toc-analytical-visualization" class="nav-link" data-scroll-target="#analytical-visualization">3. Analytical visualization</a>
+  <ul class="collapse">
+  <li><a href="#visual-statistical-analysis" id="toc-visual-statistical-analysis" class="nav-link" data-scroll-target="#visual-statistical-analysis">3.1 Visual Statistical Analysis</a>
+  <ul class="collapse">
+  <li><a href="#a-oneway-anova-test-ggbetweenstats-method" id="toc-a-oneway-anova-test-ggbetweenstats-method" class="nav-link" data-scroll-target="#a-oneway-anova-test-ggbetweenstats-method">a) Oneway ANOVA Test: <em>ggbetweenstats()</em> method</a></li>
+  <li><a href="#b-significant-test-of-correlation-ggscatterstats" id="toc-b-significant-test-of-correlation-ggscatterstats" class="nav-link" data-scroll-target="#b-significant-test-of-correlation-ggscatterstats">b) <strong>Significant Test of Correlation: <em>ggscatterstats()</em></strong></a></li>
+  <li><a href="#c-multiple-regression-model-using-lm" id="toc-c-multiple-regression-model-using-lm" class="nav-link" data-scroll-target="#c-multiple-regression-model-using-lm">c) <strong>Multiple Regression Model using lm()</strong></a></li>
+  </ul></li>
+  <li><a href="#visualizing-uncertainty" id="toc-visualizing-uncertainty" class="nav-link" data-scroll-target="#visualizing-uncertainty">3.2 Visualizing Uncertainty</a></li>
+  </ul></li>
+  <li><a href="#learning-points-and-future-work" id="toc-learning-points-and-future-work" class="nav-link" data-scroll-target="#learning-points-and-future-work">4. Learning points and future work</a></li>
   </ul>
 </nav>
     </div>
@@ -270,7 +287,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
     <div>
     <div class="quarto-title-meta-heading">Modified</div>
     <div class="quarto-title-meta-contents">
-      <p class="date-modified">February 11, 2023</p>
+      <p class="date-modified">February 15, 2023</p>
     </div>
   </div>
     
@@ -281,14 +298,14 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 
 <section id="introduction" class="level1">
 <h1>1. Introduction</h1>
-<p>In this take-home exercise, I will uncover the salient patterns of the resale prices of public housing property by residential towns and estates in Singapore by using appropriate analytical visualisation techniques learned in Lesson 4: Fundamentals of Visual Analytics. Students are encouraged to apply appropriate interactive techniques to enhance user and data discovery experiences.</p>
-<p>For the purpose of this study, the focus will be on <strong>3-ROOM, 4-ROOM and 5-ROOM types</strong>. You can choose to focus on either one housing type or multiple housing types. The study period will be on <strong>2022</strong>.</p>
-<p><em>Resale flat princes based on registration date from Jan-2017 onwards</em> from <a href="https://data.gov.sg/">Data.gov.sg</a> will be used to prepare the analytical visualisation and processed by RStudio <code>tidyverse</code> family of packages and visualized by <code>ggplot2</code> and its extensions.</p>
+<p>In this take-home exercise, I will uncover the salient patterns of the resale prices of public housing property by residential towns in Singapore by using appropriate analytical visualisation techniques learned in Lesson 4: Fundamentals of Visual Analytics.</p>
+<p>For the purpose of this study, the focus will be on 3-ROOM, 4-ROOM and 5-ROOM types. The study period will be on 2022.</p>
+<p><em>Resale flat princes based on registration date from Jan-2017 onwards</em> from <a href="https://data.gov.sg/">Data.gov.sg</a> will be used to prepare the analytical visualisation and processed by RStudio <code>tidyverse</code> family of packages and visualized by <code>ggplot2</code> and its extensions as well as other R packages.</p>
 </section>
 <section id="preparation" class="level1">
 <h1>2. Preparation</h1>
-<section id="install-and-launching-r-packages" class="level2">
-<h2 class="anchored" data-anchor-id="install-and-launching-r-packages">2.1 Install and launching R packages</h2>
+<section id="installing-and-launching-r-packages" class="level2">
+<h2 class="anchored" data-anchor-id="installing-and-launching-r-packages">2.1 Installing and launching R packages</h2>
 <p>The code chunk below uses p_load() of pacman package to check if the various packages used for the visual analysis are installed in the computer. If they are, then they will be launched into R.</p>
 <div class="cell">
 <details>
@@ -298,10 +315,11 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(plotly)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
+<p><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACgAAAAaCAYAAADFTB7LAAAAa0lEQVR42u3OywnAIBBAwcXSUoCW5D11xDoNCBGNv0MOecJOBSOi1OZMsJ4dvFxEJ1OQnMxBarIKEpNNkJbsBknJYZCSnAYJyVVQziNig7/nZkFEbhTE5HpBVO4dxOXKIDL3BLG5BJ1T6rsbMfep2CaMN00AAAAASUVORK5CYII=.png" title="Run Current Chunk" class="img-fluid"></p>
 </section>
 <section id="importing-the-data" class="level2">
 <h2 class="anchored" data-anchor-id="importing-the-data">2.2 Importing the data</h2>
-<p>The code chunk below imports resale-flat-prices-based-on-registration-date-from-jan-2017-onwards.csv from the data folder into R by using read_csv() of readr and save it as an tibble data frame called resale_data.</p>
+<p>The code chunk below imports <em>resale-flat-prices-based-on-registration-date-from-jan-2017-onwards.csv</em> from the data folder into R by using read_csv() of readr and save it as an tibble data frame called resale_data.</p>
 <div class="cell">
 <details>
 <summary>Code</summary>
@@ -327,7 +345,10 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </section>
 <section id="data-wrangling" class="level2">
 <h2 class="anchored" data-anchor-id="data-wrangling">2.3 Data wrangling</h2>
+<section id="a-filtering" class="level3">
+<h3 class="anchored" data-anchor-id="a-filtering">a) Filtering</h3>
 <p>The code chunk below filters for 3, 4 and 5 room flat types and for year 2022.</p>
+<p><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACgAAAAaCAYAAADFTB7LAAAAa0lEQVR42u3OywnAIBBAwcXSUoCW5D11xDoNCBGNv0MOecJOBSOi1OZMsJ4dvFxEJ1OQnMxBarIKEpNNkJbsBknJYZCSnAYJyVVQziNig7/nZkFEbhTE5HpBVO4dxOXKIDL3BLG5BJ1T6rsbMfep2CaMN00AAAAASUVORK5CYII=.png" title="Run Current Chunk" class="img-fluid"></p>
 <div class="cell">
 <details>
 <summary>Code</summary>
@@ -353,22 +374,25 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 #   ⁴​flat_model, ⁵​lease_commence_date</code></pre>
 </div>
 </div>
-<p>The code chunk below converts the remaining lease from months and years in the character datatype to years in the double datatype.</p>
+</section>
+<section id="b-converting-variable-and-datatype" class="level3">
+<h3 class="anchored" data-anchor-id="b-converting-variable-and-datatype">b) Converting variable and datatype</h3>
+<p>The code chunk below converts the remaining lease from months and years (in the character datatype) to months (in the numeric datatype).</p>
 <div class="cell">
 <details>
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>resale_data1 <span class="ot">&lt;-</span> resale_data_filter <span class="sc">%&gt;%</span></span>
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>resale_data_lease1 <span class="ot">&lt;-</span> resale_data_filter <span class="sc">%&gt;%</span></span>
 <span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="fu">separate</span>(remaining_lease, <span class="at">into =</span> <span class="fu">c</span>(<span class="st">"years"</span>, <span class="st">"months"</span>), <span class="at">sep =</span> <span class="st">" years "</span>) <span class="sc">%&gt;%</span></span>
 <span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a> <span class="fu">separate</span>(years, <span class="at">into =</span> <span class="fu">c</span>(<span class="st">"years"</span>, <span class="st">"test1"</span>), <span class="at">sep =</span> <span class="st">" "</span>) <span class="sc">%&gt;%</span></span>
 <span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">separate</span>(months, <span class="at">into =</span> <span class="fu">c</span>(<span class="st">"months"</span>, <span class="st">"test2"</span>), <span class="at">sep =</span> <span class="st">" "</span>) <span class="sc">%&gt;%</span></span>
 <span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">transform</span>(<span class="at">years =</span> <span class="fu">as.numeric</span>(years)) <span class="sc">%&gt;%</span></span>
 <span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">transform</span>(<span class="at">months =</span> <span class="fu">as.numeric</span>(months)) <span class="sc">%&gt;%</span></span>
 <span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">replace</span>(<span class="fu">is.na</span>(.), <span class="dv">0</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">transform</span>(<span class="at">rem_lease_inyears =</span> years <span class="sc">+</span> (months <span class="sc">/</span> <span class="dv">12</span>))</span>
+<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">transform</span>(<span class="at">rem_lease_inmonths =</span> months <span class="sc">+</span> (years <span class="sc">*</span> <span class="dv">12</span>))</span>
 <span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a>resale_data_clean <span class="ot">&lt;-</span> <span class="fu">subset</span>(resale_data1, <span class="at">select =</span> <span class="sc">-</span><span class="fu">c</span>(test1, test2))</span>
+<span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a>resale_data_lease <span class="ot">&lt;-</span> <span class="fu">subset</span>(resale_data_lease1, <span class="at">select =</span> <span class="sc">-</span><span class="fu">c</span>(test1, test2))</span>
 <span id="cb6-11"><a href="#cb6-11" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-12"><a href="#cb6-12" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(resale_data_clean)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb6-12"><a href="#cb6-12" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(resale_data_lease)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-stdout">
 <pre><code>  year month       town flat_type block       street_name storey_range
@@ -385,19 +409,861 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 4             82 New Generation                1980    57      2       420000
 5             67 New Generation                1980    57      1       328000
 6             83 New Generation                1979    56      7       360000
-  rem_lease_inyears
-1          54.41667
-2          55.08333
-3          58.00000
-4          57.16667
-5          57.08333
-6          56.58333</code></pre>
+  rem_lease_inmonths
+1                653
+2                661
+3                696
+4                686
+5                685
+6                679</code></pre>
+</div>
+</div>
+</section>
+<section id="c-ordering" class="level3">
+<h3 class="anchored" data-anchor-id="c-ordering">c) Ordering</h3>
+<p><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACgAAAAaCAYAAADFTB7LAAAAa0lEQVR42u3OywnAIBBAwcXSUoCW5D11xDoNCBGNv0MOecJOBSOi1OZMsJ4dvFxEJ1OQnMxBarIKEpNNkJbsBknJYZCSnAYJyVVQziNig7/nZkFEbhTE5HpBVO4dxOXKIDL3BLG5BJ1T6rsbMfep2CaMN00AAAAASUVORK5CYII=.png" title="Run Current Chunk" class="img-fluid"></p>
+<p>The code chunk below changes the storey range into a factor variable such that it’s ordered.</p>
+<div class="cell">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>storey_order <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"01 TO 03"</span>, <span class="st">"04 TO 06"</span>, <span class="st">"07 TO 09"</span>, <span class="st">"10 TO 12"</span>, <span class="st">"13 TO 15"</span>, <span class="st">"16 TO 18"</span>, <span class="st">"19 TO 21"</span>, <span class="st">"22 TO 24"</span>, <span class="st">"25 TO 27"</span>, <span class="st">"28 TO 30"</span>, <span class="st">"31 TO 33"</span>, <span class="st">"34 TO 36"</span>, <span class="st">"37 TO 39"</span>, <span class="st">"40 TO 42"</span>, <span class="st">"43 TO 45"</span>, <span class="st">"46 TO 48"</span>, <span class="st">"49 TO 51"</span>)</span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>resale_data_order <span class="ot">&lt;-</span> resale_data_lease <span class="sc">%&gt;%</span> </span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="st">`</span><span class="at">storey_range</span><span class="st">`</span> <span class="ot">=</span> <span class="fu">factor</span>(storey_range, <span class="at">levels =</span> storey_order))</span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(resale_data_order)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>  year month       town flat_type block       street_name storey_range
+1 2022    01 ANG MO KIO    3 ROOM   320  ANG MO KIO AVE 1     07 TO 09
+2 2022    01 ANG MO KIO    3 ROOM   225  ANG MO KIO AVE 1     07 TO 09
+3 2022    01 ANG MO KIO    3 ROOM   331  ANG MO KIO AVE 1     07 TO 09
+4 2022    01 ANG MO KIO    3 ROOM   534 ANG MO KIO AVE 10     07 TO 09
+5 2022    01 ANG MO KIO    3 ROOM   578 ANG MO KIO AVE 10     04 TO 06
+6 2022    01 ANG MO KIO    3 ROOM   452 ANG MO KIO AVE 10     01 TO 03
+  floor_area_sqm     flat_model lease_commence_date years months resale_price
+1             73 New Generation                1977    54      5       358000
+2             67 New Generation                1978    55      1       355000
+3             68 New Generation                1981    58      0       338000
+4             82 New Generation                1980    57      2       420000
+5             67 New Generation                1980    57      1       328000
+6             83 New Generation                1979    56      7       360000
+  rem_lease_inmonths
+1                653
+2                661
+3                696
+4                686
+5                685
+6                679</code></pre>
+</div>
+</div>
+</section>
+<section id="d-deriving-new-variables" class="level3">
+<h3 class="anchored" data-anchor-id="d-deriving-new-variables">d) Deriving new variables</h3>
+<p>The code chunk below creates a new variable price per square feet (psf), which is commonly used to compare the price of houses of different sizes. I did this by dividing total resale price by floor area (converted from meters to feet by multiplying by 10.7639).</p>
+<div class="cell">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>resale_data_psf <span class="ot">&lt;-</span> resale_data_order <span class="sc">%&gt;%</span></span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="st">`</span><span class="at">psf</span><span class="st">`</span> <span class="ot">=</span> <span class="fu">as.integer</span>(<span class="fu">round</span>(resale_price<span class="sc">/</span>(floor_area_sqm <span class="sc">*</span> <span class="fl">10.7639</span>), <span class="dv">2</span>)))</span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(resale_data_psf)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>  year month       town flat_type block       street_name storey_range
+1 2022    01 ANG MO KIO    3 ROOM   320  ANG MO KIO AVE 1     07 TO 09
+2 2022    01 ANG MO KIO    3 ROOM   225  ANG MO KIO AVE 1     07 TO 09
+3 2022    01 ANG MO KIO    3 ROOM   331  ANG MO KIO AVE 1     07 TO 09
+4 2022    01 ANG MO KIO    3 ROOM   534 ANG MO KIO AVE 10     07 TO 09
+5 2022    01 ANG MO KIO    3 ROOM   578 ANG MO KIO AVE 10     04 TO 06
+6 2022    01 ANG MO KIO    3 ROOM   452 ANG MO KIO AVE 10     01 TO 03
+  floor_area_sqm     flat_model lease_commence_date years months resale_price
+1             73 New Generation                1977    54      5       358000
+2             67 New Generation                1978    55      1       355000
+3             68 New Generation                1981    58      0       338000
+4             82 New Generation                1980    57      2       420000
+5             67 New Generation                1980    57      1       328000
+6             83 New Generation                1979    56      7       360000
+  rem_lease_inmonths psf
+1                653 455
+2                661 492
+3                696 461
+4                686 475
+5                685 454
+6                679 402</code></pre>
+</div>
+</div>
+</section>
+<section id="e-re-coding-variables" class="level3">
+<h3 class="anchored" data-anchor-id="e-re-coding-variables">e) Re-coding variables</h3>
+<p>The code chunks below visualizes the town distribution.</p>
+<div class="cell">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> resale_data_psf,</span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>       <span class="fu">aes</span>(<span class="at">y =</span> town)) <span class="sc">+</span></span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_bar</span>() <span class="sc">+</span></span>
+<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_bw</span>() <span class="sc">+</span>  </span>
+<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggtitle</span>(<span class="st">"Town distribution"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output-display">
+<p><img src="Take-home_Ex03_files/figure-html/unnamed-chunk-7-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<p>The code chunk below recodes the town variable into <a href="https://www.propertyguru.com.sg/property-guides/ccr-ocr-rcr-region-singapore-ura-map-21045">3 market segments</a> as defined by the Urban Redevelopment Authority (URA); Core Central Region (CCR), Rest of Central Region (RCR) and Outside Central Region (OCR).</p>
+<div class="cell">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>CCR <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"CENTRAL AREA"</span>, <span class="st">"BUKIT TIMAH"</span>)</span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>RCR <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"TOA PAYOH"</span>, <span class="st">"QUEENSTOWN"</span>, <span class="st">"MARINE PARADE"</span>, <span class="st">"KALLANG/WHAMPOA"</span>, <span class="st">"GEYLANG"</span>,<span class="st">"BISHAN"</span>)</span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>OCR <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"YISHUN"</span>, <span class="st">"WOODLANDS"</span>, <span class="st">"TAMPINES"</span>, <span class="st">"SERANGOON"</span>, <span class="st">"SENGKANG"</span>, <span class="st">"SEMBAWANG"</span>, <span class="st">"PUNGGOL"</span>, <span class="st">"PASIR RIS"</span>, <span class="st">"JURONG WEST"</span>, <span class="st">"JURONG EAST"</span>, <span class="st">"HOUGANG"</span>, <span class="st">"CLEMENTI"</span>, <span class="st">"CHOA CHU KANG"</span>, <span class="st">"BUKIT PANJANG"</span>, <span class="st">"BUKIT MERAH"</span>, <span class="st">"BUKIT BATOK"</span>, <span class="st">"BEDOK"</span>, <span class="st">"ANG MO KIO"</span>)</span>
+<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a>resale_data_final <span class="ot">&lt;-</span> resale_data_psf <span class="sc">%&gt;%</span></span>
+<span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">market_segment =</span> <span class="fu">recode</span>(town, </span>
+<span id="cb13-7"><a href="#cb13-7" aria-hidden="true" tabindex="-1"></a>  <span class="st">"CENTRAL AREA"</span> <span class="ot">=</span> <span class="st">"Core Central Region"</span>,</span>
+<span id="cb13-8"><a href="#cb13-8" aria-hidden="true" tabindex="-1"></a>  <span class="st">"BUKIT TIMAH"</span> <span class="ot">=</span> <span class="st">"Core Central Region"</span>,</span>
+<span id="cb13-9"><a href="#cb13-9" aria-hidden="true" tabindex="-1"></a>  <span class="st">"TOA PAYOH"</span> <span class="ot">=</span> <span class="st">"Rest of Central Region"</span>,</span>
+<span id="cb13-10"><a href="#cb13-10" aria-hidden="true" tabindex="-1"></a>  <span class="st">"QUEENSTOWN"</span> <span class="ot">=</span> <span class="st">"Rest of Central Region"</span>,</span>
+<span id="cb13-11"><a href="#cb13-11" aria-hidden="true" tabindex="-1"></a>  <span class="st">"MARINE PARADE"</span> <span class="ot">=</span> <span class="st">"Rest of Central Region"</span>,</span>
+<span id="cb13-12"><a href="#cb13-12" aria-hidden="true" tabindex="-1"></a>  <span class="st">"KALLANG/WHAMPOA"</span> <span class="ot">=</span> <span class="st">"Rest of Central Region"</span>,</span>
+<span id="cb13-13"><a href="#cb13-13" aria-hidden="true" tabindex="-1"></a>  <span class="st">"GEYLANG"</span> <span class="ot">=</span> <span class="st">"Rest of Central Region"</span>,</span>
+<span id="cb13-14"><a href="#cb13-14" aria-hidden="true" tabindex="-1"></a>  <span class="st">"BISHAN"</span> <span class="ot">=</span> <span class="st">"Rest of Central Region"</span>,</span>
+<span id="cb13-15"><a href="#cb13-15" aria-hidden="true" tabindex="-1"></a>  <span class="st">"YISHUN"</span> <span class="ot">=</span> <span class="st">"Outside Central Region"</span>,</span>
+<span id="cb13-16"><a href="#cb13-16" aria-hidden="true" tabindex="-1"></a>  <span class="st">"WOODLANDS"</span> <span class="ot">=</span> <span class="st">"Outside Central Region"</span>,</span>
+<span id="cb13-17"><a href="#cb13-17" aria-hidden="true" tabindex="-1"></a>  <span class="st">"TAMPINES"</span> <span class="ot">=</span> <span class="st">"Outside Central Region"</span>,</span>
+<span id="cb13-18"><a href="#cb13-18" aria-hidden="true" tabindex="-1"></a>  <span class="st">"SERANGOON"</span> <span class="ot">=</span> <span class="st">"Outside Central Region"</span>,</span>
+<span id="cb13-19"><a href="#cb13-19" aria-hidden="true" tabindex="-1"></a>  <span class="st">"SENGKANG"</span> <span class="ot">=</span> <span class="st">"Outside Central Region"</span>,</span>
+<span id="cb13-20"><a href="#cb13-20" aria-hidden="true" tabindex="-1"></a>  <span class="st">"SEMBAWANG"</span> <span class="ot">=</span> <span class="st">"Outside Central Region"</span>,</span>
+<span id="cb13-21"><a href="#cb13-21" aria-hidden="true" tabindex="-1"></a>  <span class="st">"PUNGGOL"</span> <span class="ot">=</span> <span class="st">"Outside Central Region"</span>,</span>
+<span id="cb13-22"><a href="#cb13-22" aria-hidden="true" tabindex="-1"></a>  <span class="st">"PASIR RIS"</span> <span class="ot">=</span> <span class="st">"Outside Central Region"</span>,</span>
+<span id="cb13-23"><a href="#cb13-23" aria-hidden="true" tabindex="-1"></a>  <span class="st">"JURONG WEST"</span> <span class="ot">=</span> <span class="st">"Outside Central Region"</span>,</span>
+<span id="cb13-24"><a href="#cb13-24" aria-hidden="true" tabindex="-1"></a>  <span class="st">"JURONG EAST"</span> <span class="ot">=</span> <span class="st">"Outside Central Region"</span>,</span>
+<span id="cb13-25"><a href="#cb13-25" aria-hidden="true" tabindex="-1"></a>  <span class="st">"HOUGANG"</span> <span class="ot">=</span> <span class="st">"Outside Central Region"</span>,</span>
+<span id="cb13-26"><a href="#cb13-26" aria-hidden="true" tabindex="-1"></a>  <span class="st">"CLEMENTI"</span> <span class="ot">=</span> <span class="st">"Outside Central Region"</span>,</span>
+<span id="cb13-27"><a href="#cb13-27" aria-hidden="true" tabindex="-1"></a>  <span class="st">"CHOA CHU KANG"</span> <span class="ot">=</span> <span class="st">"Outside Central Region"</span>,</span>
+<span id="cb13-28"><a href="#cb13-28" aria-hidden="true" tabindex="-1"></a>  <span class="st">"BUKIT PANJANG"</span> <span class="ot">=</span> <span class="st">"Outside Central Region"</span>,</span>
+<span id="cb13-29"><a href="#cb13-29" aria-hidden="true" tabindex="-1"></a>  <span class="st">"BUKIT MERAH"</span> <span class="ot">=</span> <span class="st">"Outside Central Region"</span>,</span>
+<span id="cb13-30"><a href="#cb13-30" aria-hidden="true" tabindex="-1"></a>  <span class="st">"BUKIT BATOK"</span> <span class="ot">=</span> <span class="st">"Outside Central Region"</span>,</span>
+<span id="cb13-31"><a href="#cb13-31" aria-hidden="true" tabindex="-1"></a>  <span class="st">"BEDOK"</span> <span class="ot">=</span> <span class="st">"Outside Central Region"</span>,</span>
+<span id="cb13-32"><a href="#cb13-32" aria-hidden="true" tabindex="-1"></a>  <span class="st">"ANG MO KIO"</span> <span class="ot">=</span> <span class="st">"Outside Central Region"</span>))</span>
+<span id="cb13-33"><a href="#cb13-33" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb13-34"><a href="#cb13-34" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(resale_data_final)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>  year month       town flat_type block       street_name storey_range
+1 2022    01 ANG MO KIO    3 ROOM   320  ANG MO KIO AVE 1     07 TO 09
+2 2022    01 ANG MO KIO    3 ROOM   225  ANG MO KIO AVE 1     07 TO 09
+3 2022    01 ANG MO KIO    3 ROOM   331  ANG MO KIO AVE 1     07 TO 09
+4 2022    01 ANG MO KIO    3 ROOM   534 ANG MO KIO AVE 10     07 TO 09
+5 2022    01 ANG MO KIO    3 ROOM   578 ANG MO KIO AVE 10     04 TO 06
+6 2022    01 ANG MO KIO    3 ROOM   452 ANG MO KIO AVE 10     01 TO 03
+  floor_area_sqm     flat_model lease_commence_date years months resale_price
+1             73 New Generation                1977    54      5       358000
+2             67 New Generation                1978    55      1       355000
+3             68 New Generation                1981    58      0       338000
+4             82 New Generation                1980    57      2       420000
+5             67 New Generation                1980    57      1       328000
+6             83 New Generation                1979    56      7       360000
+  rem_lease_inmonths psf         market_segment
+1                653 455 Outside Central Region
+2                661 492 Outside Central Region
+3                696 461 Outside Central Region
+4                686 475 Outside Central Region
+5                685 454 Outside Central Region
+6                679 402 Outside Central Region</code></pre>
+</div>
+</div>
+<p>The code chunks below visualizes the storey range distribution.</p>
+<div class="cell">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> resale_data_psf,</span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>       <span class="fu">aes</span>(<span class="at">y =</span> storey_range)) <span class="sc">+</span></span>
+<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_bar</span>() <span class="sc">+</span></span>
+<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_bw</span>() <span class="sc">+</span>  </span>
+<span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggtitle</span>(<span class="st">"Storey range distribution"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output-display">
+<p><img src="Take-home_Ex03_files/figure-html/unnamed-chunk-9-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<p>I initially thought of re-coding storey range into ‘low’, ‘middle’ and ‘high’ floor but found that this may not allow a fair comparison as different buildings have different number of storeys. It is difficult to have a standardized definition of ‘low’, ‘middle’ and ‘high’ floor. For some buildings, 10th storey may be considered a high floor, but for other buildings, 10th storey may be the middle floor.</p>
+<div class="cell">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>skimr<span class="sc">::</span><span class="fu">skim</span>(resale_data_final)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output-display">
+<table class="table table-sm table-striped">
+<caption>Data summary</caption>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">Name</td>
+<td style="text-align: left;">resale_data_final</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Number of rows</td>
+<td style="text-align: left;">24374</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Number of columns</td>
+<td style="text-align: left;">16</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">_______________________</td>
+<td style="text-align: left;"></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Column type frequency:</td>
+<td style="text-align: left;"></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">character</td>
+<td style="text-align: left;">8</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">factor</td>
+<td style="text-align: left;">1</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">numeric</td>
+<td style="text-align: left;">7</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">________________________</td>
+<td style="text-align: left;"></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Group variables</td>
+<td style="text-align: left;">None</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Variable type: character</strong></p>
+<table class="table table-sm table-striped">
+<colgroup>
+<col style="width: 20%">
+<col style="width: 13%">
+<col style="width: 19%">
+<col style="width: 5%">
+<col style="width: 5%">
+<col style="width: 8%">
+<col style="width: 12%">
+<col style="width: 15%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;">skim_variable</th>
+<th style="text-align: right;">n_missing</th>
+<th style="text-align: right;">complete_rate</th>
+<th style="text-align: right;">min</th>
+<th style="text-align: right;">max</th>
+<th style="text-align: right;">empty</th>
+<th style="text-align: right;">n_unique</th>
+<th style="text-align: right;">whitespace</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">year</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">4</td>
+<td style="text-align: right;">4</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">0</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">month</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">2</td>
+<td style="text-align: right;">2</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">12</td>
+<td style="text-align: right;">0</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">town</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">5</td>
+<td style="text-align: right;">15</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">26</td>
+<td style="text-align: right;">0</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">flat_type</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">6</td>
+<td style="text-align: right;">6</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">3</td>
+<td style="text-align: right;">0</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">block</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">4</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">2457</td>
+<td style="text-align: right;">0</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">street_name</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">7</td>
+<td style="text-align: right;">20</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">552</td>
+<td style="text-align: right;">0</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">flat_model</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">4</td>
+<td style="text-align: right;">22</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">16</td>
+<td style="text-align: right;">0</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">market_segment</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">19</td>
+<td style="text-align: right;">22</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">3</td>
+<td style="text-align: right;">0</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Variable type: factor</strong></p>
+<table class="table table-sm table-striped">
+<colgroup>
+<col style="width: 14%">
+<col style="width: 10%">
+<col style="width: 14%">
+<col style="width: 8%">
+<col style="width: 9%">
+<col style="width: 43%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;">skim_variable</th>
+<th style="text-align: right;">n_missing</th>
+<th style="text-align: right;">complete_rate</th>
+<th style="text-align: left;">ordered</th>
+<th style="text-align: right;">n_unique</th>
+<th style="text-align: left;">top_counts</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">storey_range</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: left;">FALSE</td>
+<td style="text-align: right;">17</td>
+<td style="text-align: left;">04 : 5453, 07 : 5110, 10 : 4499, 01 : 4118</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Variable type: numeric</strong></p>
+<table class="table table-sm table-striped">
+<colgroup>
+<col style="width: 18%">
+<col style="width: 9%">
+<col style="width: 13%">
+<col style="width: 9%">
+<col style="width: 9%">
+<col style="width: 6%">
+<col style="width: 6%">
+<col style="width: 6%">
+<col style="width: 6%">
+<col style="width: 7%">
+<col style="width: 5%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;">skim_variable</th>
+<th style="text-align: right;">n_missing</th>
+<th style="text-align: right;">complete_rate</th>
+<th style="text-align: right;">mean</th>
+<th style="text-align: right;">sd</th>
+<th style="text-align: right;">p0</th>
+<th style="text-align: right;">p25</th>
+<th style="text-align: right;">p50</th>
+<th style="text-align: right;">p75</th>
+<th style="text-align: right;">p100</th>
+<th style="text-align: left;">hist</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">floor_area_sqm</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">94.07</td>
+<td style="text-align: right;">19.32</td>
+<td style="text-align: right;">51</td>
+<td style="text-align: right;">81</td>
+<td style="text-align: right;">93</td>
+<td style="text-align: right;">110</td>
+<td style="text-align: right;">159</td>
+<td style="text-align: left;">▅▇▆▃▁</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">lease_commence_date</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">1997.46</td>
+<td style="text-align: right;">14.98</td>
+<td style="text-align: right;">1967</td>
+<td style="text-align: right;">1985</td>
+<td style="text-align: right;">1998</td>
+<td style="text-align: right;">2014</td>
+<td style="text-align: right;">2019</td>
+<td style="text-align: left;">▂▆▅▃▇</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">years</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">74.06</td>
+<td style="text-align: right;">15.02</td>
+<td style="text-align: right;">43</td>
+<td style="text-align: right;">61</td>
+<td style="text-align: right;">74</td>
+<td style="text-align: right;">91</td>
+<td style="text-align: right;">96</td>
+<td style="text-align: left;">▂▇▃▅▇</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">months</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">5.56</td>
+<td style="text-align: right;">3.49</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">3</td>
+<td style="text-align: right;">6</td>
+<td style="text-align: right;">9</td>
+<td style="text-align: right;">11</td>
+<td style="text-align: left;">▇▅▅▅▇</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">resale_price</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">536391.17</td>
+<td style="text-align: right;">157993.72</td>
+<td style="text-align: right;">200000</td>
+<td style="text-align: right;">428000</td>
+<td style="text-align: right;">515000</td>
+<td style="text-align: right;">610000</td>
+<td style="text-align: right;">1418000</td>
+<td style="text-align: left;">▅▇▂▁▁</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">rem_lease_inmonths</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">894.28</td>
+<td style="text-align: right;">180.23</td>
+<td style="text-align: right;">517</td>
+<td style="text-align: right;">741</td>
+<td style="text-align: right;">895</td>
+<td style="text-align: right;">1097</td>
+<td style="text-align: right;">1157</td>
+<td style="text-align: left;">▂▇▅▅▇</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">psf</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">532.40</td>
+<td style="text-align: right;">126.65</td>
+<td style="text-align: right;">309</td>
+<td style="text-align: right;">449</td>
+<td style="text-align: right;">498</td>
+<td style="text-align: right;">573</td>
+<td style="text-align: right;">1368</td>
+<td style="text-align: left;">▇▅▁▁▁</td>
+</tr>
+</tbody>
+</table>
 </div>
 </div>
 </section>
 </section>
-<section id="analytical-visualization-and-procedure" class="level1">
-<h1>3. Analytical visualization and procedure</h1>
+</section>
+<section id="analytical-visualization" class="level1">
+<h1>3. Analytical visualization</h1>
+<section id="visual-statistical-analysis" class="level2">
+<h2 class="anchored" data-anchor-id="visual-statistical-analysis">3.1 Visual Statistical Analysis</h2>
+<p>In this section, I attempt to understand the difference in means of prices between different market segments and flat type. To do so, I use the Oneway ANOVA tests, which will show the comparison between means. After which, I attempt to understand the correlation of remaining lease with price, first by using significant test of correlation followed by a multi-linear regression where I include control variables.</p>
+<section id="a-oneway-anova-test-ggbetweenstats-method" class="level3">
+<h3 class="anchored" data-anchor-id="a-oneway-anova-test-ggbetweenstats-method">a) Oneway ANOVA Test: <em>ggbetweenstats()</em> method</h3>
+<p><strong>Price By Market Segment</strong></p>
+<p>In the code chunk below, <a href="https://indrajeetpatil.github.io/ggstatsplot/reference/ggbetweenstats.html"><em>ggbetweenstats()</em></a> is used to build a visual for One-way ANOVA test on price per square feet (psf) by market segment. The purpose is to test if indeed the price per square feet differs significantly across the 3 market segments. The null hypothesis is that all population means are equal (i.e.&nbsp;no variation in means across the 3 market segments ) while the alternative hypothesis is that at least 1 population mean is different.</p>
+<div class="cell">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggbetweenstats</span>(</span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">data =</span> resale_data_final,</span>
+<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">x =</span> market_segment, </span>
+<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">y =</span> psf,</span>
+<span id="cb17-5"><a href="#cb17-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">type =</span> <span class="st">"p"</span>,</span>
+<span id="cb17-6"><a href="#cb17-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">mean.ci =</span> <span class="cn">TRUE</span>, </span>
+<span id="cb17-7"><a href="#cb17-7" aria-hidden="true" tabindex="-1"></a>  <span class="at">pairwise.comparisons =</span> <span class="cn">TRUE</span>, </span>
+<span id="cb17-8"><a href="#cb17-8" aria-hidden="true" tabindex="-1"></a>  <span class="at">pairwise.display =</span> <span class="st">"s"</span>,</span>
+<span id="cb17-9"><a href="#cb17-9" aria-hidden="true" tabindex="-1"></a>  <span class="at">p.adjust.method =</span> <span class="st">"fdr"</span>,</span>
+<span id="cb17-10"><a href="#cb17-10" aria-hidden="true" tabindex="-1"></a>  <span class="at">messages =</span> <span class="cn">FALSE</span></span>
+<span id="cb17-11"><a href="#cb17-11" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output-display">
+<p><img src="Take-home_Ex03_files/figure-html/unnamed-chunk-11-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<p>Analysis:</p>
+<p>From the visualization, we can see that the p-value is extremely small (&lt;0.01). This means that we reject the null hypothesis and say that there is evidence that not all the means are the same and at least 1 mean is different across the 3 market segments, statistically significant at 1% level.</p>
+<p><strong>Price By Flat Type</strong></p>
+<p>In the code chunk below, <a href="https://indrajeetpatil.github.io/ggstatsplot/reference/ggbetweenstats.html"><em>ggbetweenstats()</em></a> is used to build a visual for One-way ANOVA test on price per square feet (psf) by flat type (3, 4 &amp; 5 Room). The purpose is to test if indeed the psf differs significantly across the flat types. The null hypothesis is that all population means are equal (i.e.&nbsp;no variation in means across the 3 market segments) while the alternative hypothesis is that at least 1 population mean is different.</p>
+<div class="cell">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggbetweenstats</span>(</span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">data =</span> resale_data_final,</span>
+<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">x =</span> flat_type, </span>
+<span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">y =</span> psf,</span>
+<span id="cb18-5"><a href="#cb18-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">type =</span> <span class="st">"p"</span>,</span>
+<span id="cb18-6"><a href="#cb18-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">mean.ci =</span> <span class="cn">TRUE</span>, </span>
+<span id="cb18-7"><a href="#cb18-7" aria-hidden="true" tabindex="-1"></a>  <span class="at">pairwise.comparisons =</span> <span class="cn">TRUE</span>, </span>
+<span id="cb18-8"><a href="#cb18-8" aria-hidden="true" tabindex="-1"></a>  <span class="at">pairwise.display =</span> <span class="st">"s"</span>,</span>
+<span id="cb18-9"><a href="#cb18-9" aria-hidden="true" tabindex="-1"></a>  <span class="at">p.adjust.method =</span> <span class="st">"fdr"</span>,</span>
+<span id="cb18-10"><a href="#cb18-10" aria-hidden="true" tabindex="-1"></a>  <span class="at">messages =</span> <span class="cn">FALSE</span></span>
+<span id="cb18-11"><a href="#cb18-11" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output-display">
+<p><img src="Take-home_Ex03_files/figure-html/unnamed-chunk-12-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<p>Analysis:</p>
+<p>From the visualization, we can see that the p-value is extremely small (&lt;0.01). This means that we reject the null hypothesis and say that there is evidence that not all the means are the same and at least 1 mean is different across the 3 flat types, statistically significant at 1% level.</p>
+<p>We can also see that 4 ROOM flat type has highest mean psf, followed by 3 ROOM then 5 ROOM. It is interesting that 4 ROOM mean psf is actually higher than that of 3 ROOM since we usually expect that the bigger the flat, the lower the psf.</p>
+</section>
+<section id="b-significant-test-of-correlation-ggscatterstats" class="level3">
+<h3 class="anchored" data-anchor-id="b-significant-test-of-correlation-ggscatterstats">b) <strong>Significant Test of Correlation: <em>ggscatterstats()</em></strong></h3>
+<p>In the code chunks below, <a href="https://indrajeetpatil.github.io/ggstatsplot/reference/ggscatterstats.html"><em>ggscatterstats()</em></a> is used to build a visual for Significant Test of Correlation between remaining lease in months and resale price per sf (psf).</p>
+<div class="cell">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggscatterstats</span>(</span>
+<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">data =</span> resale_data_final,</span>
+<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">x =</span> psf,</span>
+<span id="cb19-4"><a href="#cb19-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">y =</span> rem_lease_inmonths,</span>
+<span id="cb19-5"><a href="#cb19-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">marginal =</span> <span class="cn">FALSE</span>,</span>
+<span id="cb19-6"><a href="#cb19-6" aria-hidden="true" tabindex="-1"></a>  )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output-display">
+<p><img src="Take-home_Ex03_files/figure-html/unnamed-chunk-13-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<div class="cell">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggscatterstats</span>(</span>
+<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">data =</span> resale_data_final,</span>
+<span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">x =</span> rem_lease_inmonths,</span>
+<span id="cb20-4"><a href="#cb20-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">y =</span> psf,</span>
+<span id="cb20-5"><a href="#cb20-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">marginal =</span> <span class="cn">FALSE</span>,</span>
+<span id="cb20-6"><a href="#cb20-6" aria-hidden="true" tabindex="-1"></a>  )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output-display">
+<p><img src="Take-home_Ex03_files/figure-html/unnamed-chunk-14-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<p>Analysis:</p>
+<p>There seems to be a statistically significant positive correlation between psf and remaining lease. The higher the remaining lease, the higher the price per square feet. To further support this, we want to include some control variables by having a multi-linear regression model including control variables such as flat type, flat model, market segment and month as shown below.</p>
+</section>
+<section id="c-multiple-regression-model-using-lm" class="level3">
+<h3 class="anchored" data-anchor-id="c-multiple-regression-model-using-lm">c) <strong>Multiple Regression Model using lm()</strong></h3>
+<p>The code chunk below is used to calibrate a multiple linear regression model by using <em>lm()</em> of Base Stats of . The dependent/Y variable is psf while the independent/X variables are remaining lease, flat type, flat model, market segment and month.</p>
+<div class="cell">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a>model <span class="ot">&lt;-</span> <span class="fu">lm</span>(psf <span class="sc">~</span> rem_lease_inmonths <span class="sc">+</span> flat_type <span class="sc">+</span> flat_model <span class="sc">+</span> market_segment <span class="sc">+</span> month, <span class="at">data =</span> resale_data_final)</span>
+<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a>model</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Call:
+lm(formula = psf ~ rem_lease_inmonths + flat_type + flat_model + 
+    market_segment + month, data = resale_data_final)
+
+Coefficients:
+                         (Intercept)                    rem_lease_inmonths  
+                            264.0395                                0.4587  
+                     flat_type4 ROOM                       flat_type5 ROOM  
+                            -30.6890                              -37.4823  
+             flat_modelAdjoined flat                        flat_modelDBSS  
+                             96.5466                              217.7092  
+                  flat_modelImproved         flat_modelImproved-Maisonette  
+                             40.8898                              162.1900  
+                   flat_modelModel A          flat_modelModel A-Maisonette  
+                             42.0292                              129.2770  
+                  flat_modelModel A2              flat_modelNew Generation  
+                             11.5564                               91.7886  
+         flat_modelPremium Apartment      flat_modelPremium Apartment Loft  
+                             40.3449                              239.3396  
+                flat_modelSimplified                    flat_modelStandard  
+                             74.9831                               84.1695  
+                   flat_modelTerrace                     flat_modelType S1  
+                            353.6917                              329.4812  
+                   flat_modelType S2  market_segmentOutside Central Region  
+                            335.9461                             -223.5458  
+market_segmentRest of Central Region                               month02  
+                            -56.2748                                5.6644  
+                             month03                               month04  
+                             10.3838                               17.0764  
+                             month05                               month06  
+                             21.1960                               27.2774  
+                             month07                               month08  
+                             28.6735                               30.4727  
+                             month09                               month10  
+                             36.1532                               41.7470  
+                             month11                               month12  
+                             37.6914                               39.9656  </code></pre>
+</div>
+</div>
+<div class="cell">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggcoefstats</span>(model, </span>
+<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a>            <span class="at">output =</span> <span class="st">"plot"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output-display">
+<p><img src="Take-home_Ex03_files/figure-html/unnamed-chunk-16-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<div class="cell">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="fu">check_collinearity</span>(model)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code># Check for Multicollinearity
+
+Low Correlation
+
+               Term  VIF   VIF 95% CI Increased SE Tolerance Tolerance 95% CI
+ rem_lease_inmonths 2.01 [1.97, 2.05]         1.42      0.50     [0.49, 0.51]
+          flat_type 2.75 [2.69, 2.81]         1.66      0.36     [0.36, 0.37]
+              month 1.01 [1.00, 1.04]         1.01      0.99     [0.97, 1.00]
+         flat_model 6.18 [6.04, 6.33]         2.49      0.16     [0.16, 0.17]
+
+Moderate Correlation
+
+           Term  VIF   VIF 95% CI Increased SE Tolerance Tolerance 95% CI
+ market_segment 1.62 [1.59, 1.65]         1.27      0.62     [0.61, 0.63]</code></pre>
+</div>
+</div>
+<div class="cell">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a>check_c <span class="ot">&lt;-</span> <span class="fu">check_collinearity</span>(model)</span>
+<span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(check_c)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output-display">
+<p><img src="Take-home_Ex03_files/figure-html/unnamed-chunk-18-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<div class="cell">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a>check_n <span class="ot">&lt;-</span> <span class="fu">check_normality</span>(model)</span>
+<span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb27-3"><a href="#cb27-3" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(check_n)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output-display">
+<p><img src="Take-home_Ex03_files/figure-html/unnamed-chunk-19-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<div class="cell">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb28"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a>check_h <span class="ot">&lt;-</span> <span class="fu">check_heteroscedasticity</span>(model)</span>
+<span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb28-3"><a href="#cb28-3" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(check_h)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output-display">
+<p><img src="Take-home_Ex03_files/figure-html/unnamed-chunk-20-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<div class="cell">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb29"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a><span class="fu">check_model</span>(model)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output-display">
+<p><img src="Take-home_Ex03_files/figure-html/unnamed-chunk-21-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<p>Analysis:</p>
+<p>After controlling for several variables (i.e.&nbsp;holding them constant), we see that remaining lease still has a statistically significantly positive correlation with price per sf, similar to the findings we found in sub-section b above. In this regression model, we see that for every 1 month increase in remaining lease, psf increases by $0.46.</p>
+<p>There doesn’t seem to be multi-collinearity as we can see that the VIFs are &lt;10. The distribution also seems somewhat normal although heteroscedasticity may not hold true.</p>
+</section>
+</section>
+<section id="visualizing-uncertainty" class="level2">
+<h2 class="anchored" data-anchor-id="visualizing-uncertainty">3.2 Visualizing Uncertainty</h2>
+<p>In this section, I attempt to visualize uncertainty using standard error of mean of price per sf by flat type. This will enable me to compare the uncertainty of the point estimate.</p>
+<div class="cell">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb30"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a>my_sum <span class="ot">&lt;-</span> resale_data_final <span class="sc">%&gt;%</span></span>
+<span id="cb30-2"><a href="#cb30-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(flat_type) <span class="sc">%&gt;%</span></span>
+<span id="cb30-3"><a href="#cb30-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(</span>
+<span id="cb30-4"><a href="#cb30-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">n=</span><span class="fu">n</span>(),</span>
+<span id="cb30-5"><a href="#cb30-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">mean=</span><span class="fu">mean</span>(psf),</span>
+<span id="cb30-6"><a href="#cb30-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">sd=</span><span class="fu">sd</span>(psf)</span>
+<span id="cb30-7"><a href="#cb30-7" aria-hidden="true" tabindex="-1"></a>    ) <span class="sc">%&gt;%</span></span>
+<span id="cb30-8"><a href="#cb30-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">se=</span>sd<span class="sc">/</span><span class="fu">sqrt</span>(n<span class="dv">-1</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+<div class="cell">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb31"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a>knitr<span class="sc">::</span><span class="fu">kable</span>(<span class="fu">head</span>(my_sum), <span class="at">format =</span> <span class="st">'html'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output-display">
+
+<table>
+ <thead>
+  <tr>
+   <th style="text-align:left;"> flat_type </th>
+   <th style="text-align:right;"> n </th>
+   <th style="text-align:right;"> mean </th>
+   <th style="text-align:right;"> sd </th>
+   <th style="text-align:right;"> se </th>
+  </tr>
+ </thead>
+<tbody>
+  <tr>
+   <td style="text-align:left;"> 3 ROOM </td>
+   <td style="text-align:right;"> 6346 </td>
+   <td style="text-align:right;"> 531.9578 </td>
+   <td style="text-align:right;"> 114.2673 </td>
+   <td style="text-align:right;"> 1.434518 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> 4 ROOM </td>
+   <td style="text-align:right;"> 11312 </td>
+   <td style="text-align:right;"> 540.8934 </td>
+   <td style="text-align:right;"> 136.1932 </td>
+   <td style="text-align:right;"> 1.280575 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> 5 ROOM </td>
+   <td style="text-align:right;"> 6716 </td>
+   <td style="text-align:right;"> 518.5222 </td>
+   <td style="text-align:right;"> 119.7026 </td>
+   <td style="text-align:right;"> 1.460766 </td>
+  </tr>
+</tbody>
+</table>
+
+</div>
+</div>
+<div class="cell">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb32"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(my_sum) <span class="sc">+</span></span>
+<span id="cb32-2"><a href="#cb32-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_errorbar</span>(</span>
+<span id="cb32-3"><a href="#cb32-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">aes</span>(<span class="at">x=</span><span class="fu">reorder</span>(flat_type, <span class="sc">-</span>mean),</span>
+<span id="cb32-4"><a href="#cb32-4" aria-hidden="true" tabindex="-1"></a>        <span class="at">ymin=</span>mean<span class="sc">-</span>se, </span>
+<span id="cb32-5"><a href="#cb32-5" aria-hidden="true" tabindex="-1"></a>        <span class="at">ymax=</span>mean<span class="sc">+</span>se), </span>
+<span id="cb32-6"><a href="#cb32-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">width=</span><span class="fl">0.2</span>, </span>
+<span id="cb32-7"><a href="#cb32-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">colour=</span><span class="st">"black"</span>, </span>
+<span id="cb32-8"><a href="#cb32-8" aria-hidden="true" tabindex="-1"></a>    <span class="at">alpha=</span><span class="fl">0.9</span>, </span>
+<span id="cb32-9"><a href="#cb32-9" aria-hidden="true" tabindex="-1"></a>    <span class="at">size=</span><span class="fl">0.5</span>) <span class="sc">+</span></span>
+<span id="cb32-10"><a href="#cb32-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(aes</span>
+<span id="cb32-11"><a href="#cb32-11" aria-hidden="true" tabindex="-1"></a>           (<span class="at">x=</span>flat_type, </span>
+<span id="cb32-12"><a href="#cb32-12" aria-hidden="true" tabindex="-1"></a>            <span class="at">y=</span>mean), </span>
+<span id="cb32-13"><a href="#cb32-13" aria-hidden="true" tabindex="-1"></a>           <span class="at">stat=</span><span class="st">"identity"</span>, </span>
+<span id="cb32-14"><a href="#cb32-14" aria-hidden="true" tabindex="-1"></a>           <span class="at">color=</span><span class="st">"red"</span>,</span>
+<span id="cb32-15"><a href="#cb32-15" aria-hidden="true" tabindex="-1"></a>           <span class="at">size =</span> <span class="fl">1.5</span>,</span>
+<span id="cb32-16"><a href="#cb32-16" aria-hidden="true" tabindex="-1"></a>           <span class="at">alpha=</span><span class="dv">1</span>) <span class="sc">+</span></span>
+<span id="cb32-17"><a href="#cb32-17" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggtitle</span>(<span class="st">"Standard error of mean </span></span>
+<span id="cb32-18"><a href="#cb32-18" aria-hidden="true" tabindex="-1"></a><span class="st">          psf by flat type"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output-display">
+<p><img src="Take-home_Ex03_files/figure-html/unnamed-chunk-24-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<div class="cell">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb33"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a>resale_data_final <span class="sc">%&gt;%</span></span>
+<span id="cb33-2"><a href="#cb33-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> flat_type, </span>
+<span id="cb33-3"><a href="#cb33-3" aria-hidden="true" tabindex="-1"></a>             <span class="at">y =</span> psf)) <span class="sc">+</span></span>
+<span id="cb33-4"><a href="#cb33-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">stat_pointinterval</span>(</span>
+<span id="cb33-5"><a href="#cb33-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">show.legend =</span> <span class="cn">FALSE</span>) <span class="sc">+</span>   </span>
+<span id="cb33-6"><a href="#cb33-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(</span>
+<span id="cb33-7"><a href="#cb33-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">title =</span> <span class="st">"Visualising confidence intervals of mean psf"</span>,</span>
+<span id="cb33-8"><a href="#cb33-8" aria-hidden="true" tabindex="-1"></a>    <span class="at">subtitle =</span> <span class="st">"Mean Point + Multiple-interval plot"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output-display">
+<p><img src="Take-home_Ex03_files/figure-html/unnamed-chunk-25-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<div class="cell">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb34"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a>devtools<span class="sc">::</span><span class="fu">install_github</span>(<span class="st">"wilkelab/ungeviz"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+<div class="cell">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb35"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ungeviz)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+<div class="cell">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb36"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> resale_data_final, </span>
+<span id="cb36-2"><a href="#cb36-2" aria-hidden="true" tabindex="-1"></a>       (<span class="fu">aes</span>(<span class="at">x =</span> <span class="fu">factor</span>(flat_type), <span class="at">y =</span> psf))) <span class="sc">+</span></span>
+<span id="cb36-3"><a href="#cb36-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">position =</span> <span class="fu">position_jitter</span>(</span>
+<span id="cb36-4"><a href="#cb36-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">height =</span> <span class="fl">0.3</span>, <span class="at">width =</span> <span class="fl">0.05</span>), </span>
+<span id="cb36-5"><a href="#cb36-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">size =</span> <span class="fl">0.4</span>, <span class="at">color =</span> <span class="st">"#0072B2"</span>, <span class="at">alpha =</span> <span class="dv">1</span><span class="sc">/</span><span class="dv">2</span>) <span class="sc">+</span></span>
+<span id="cb36-6"><a href="#cb36-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_hpline</span>(<span class="at">data =</span> <span class="fu">sampler</span>(<span class="dv">25</span>, <span class="at">group =</span> flat_type), <span class="at">height =</span> <span class="fl">0.6</span>, <span class="at">color =</span> <span class="st">"#D55E00"</span>) <span class="sc">+</span></span>
+<span id="cb36-7"><a href="#cb36-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_bw</span>() <span class="sc">+</span> </span>
+<span id="cb36-8"><a href="#cb36-8" aria-hidden="true" tabindex="-1"></a>  <span class="co"># `.draw` is a generated column indicating the sample draw</span></span>
+<span id="cb36-9"><a href="#cb36-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">transition_states</span>(.draw, <span class="dv">1</span>, <span class="dv">3</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output-display">
+<p><img src="Take-home_Ex03_files/figure-html/unnamed-chunk-28-1.gif" class="img-fluid"></p>
+</div>
+</div>
+<p>Analysis:</p>
+<p>It appears that the Standard Error seems to be very similar between the different flat types. The error bars are about the same height. This shows that the uncertainty of the means are very similar across the flat types and they can be compared.</p>
+<p>The confidence intervals seems to overlap between the 3 flat types, which could mean that the mean psf may not be statistically significantly different from each other. However, from the one way ANOVA test in section 3.1, we saw that they are statistically significantly different.</p>
+</section>
+</section>
+<section id="learning-points-and-future-work" class="level1">
+<h1>4. Learning points and future work</h1>
+<p>For this assignment, I selected only several cuts of data for visualization. For example, I only conducted the One way Anova tests on psf by the 3 market segments and the 3 flat types. This is so that we can have results that are more scoped and interpret-able. For future work, I can conduct the tests on more more cuts of data.</p>
+<p>It was also difficult to include all the variables I would like in the multi-linear regression. Most of them are categorical variables and the interpretation of their correlation coefficients is not useful for my objective of finding correlation between remaining lease and psf. The coefficients on categorical variables shows us the differential effect of that category compared to the omitted category. However, I included them simply as control variables to hold them constant. For future work, we may try to interpret these coefficients.</p>
 
 
 </section>
