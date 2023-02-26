@@ -220,7 +220,7 @@ head(trade_balance_region)
 
 # 3. Analysis of Bi-lateral trade time trends
 
-In this section, we use a cycle plot, slope graph, horizontal chart and braid graph to visualise how imports, exports and trade balance has changed between January 2020 to December 2022. This will show us how the bi-lateral trade was impacted when the first COVID-19 case in Singapore was confirmed on 23 January 2020 as well as the global economic and political dynamic in 2022 such as the Russian-Ukraine crisis.
+In this section, we use a cycle plot, braid graph, slope graph and horizontal chart to visualise how imports, exports and trade balance has changed between January 2020 to December 2022. This will show us how the bi-lateral trade was impacted when the first COVID-19 case in Singapore was confirmed on 23 January 2020 as well as the global economic and political dynamic in 2022 such as the Russian-Ukraine crisis.
 
 ## 3.1 Cycle Plot
 
@@ -426,13 +426,13 @@ ggplotly(m)
 
 Singapore's trade balance with Malaysia seemed to have improved (reduction of trade deficit) for most months between 2021 to 2022 except for January, March, September and November. From the imports and exports we can see that both have generally increased between 2020 to 2022 for all months, although exports increase at a slightly faster rate due to increase in shipments of oil as [reported](https://www.channelnewsasia.com/business/singapore-trade-growth-imports-exports-nodx-2022-3273566).
 
-## 3.2 Braid chart
+## 3.2 Braid graph
 
-We will create the slope graph to visualise how trade balance has changed between trade surplus and trade deficit between January 2020 to December 2022.
+We will create the Braid graph to visualise how trade balance has changed between trade surplus and trade deficit between January 2020 to December 2022.
 
 **i) By Region**
 
-The code chunk below creates the Braid chart to visualise how trade balance has changed between 2020 to 2022 for each of regions.
+The code chunk below creates the Braid graph to visualise how trade balance has changed between 2020 to 2022 for each of regions.
 
 ```{r}
 ggplot() +
@@ -453,7 +453,7 @@ ggplot() +
 
 **Analysis:**
 
-From the braid chart, we can see that Singapore has maintained mostly a trade surplus with Africa, Asia and Oceania except for some months. Similarly, Singapore has maintained mostly a trade deficit with Europe and European Union except for some months. In terms of trade balance with America, Singapore started off with mostly a trade surplus in 2020 but fluctuated between trade surplus and deficit in 2021 before having mostly a trade deficit in 2022.
+From the braid graph, we can see that Singapore has maintained mostly a trade surplus with Africa, Asia and Oceania except for some months. Similarly, Singapore has maintained mostly a trade deficit with Europe and European Union except for some months. In terms of trade balance with America, Singapore started off with mostly a trade surplus in 2020 but fluctuated between trade surplus and deficit in 2021 before having mostly a trade deficit in 2022.
 
 **ii) By Major Trading Partner**
 
@@ -464,7 +464,7 @@ trade_balance_country_braid <- trade_balance_country %>%
   mutate(export = export/1000)
 ```
 
-The code chunk below creates the slope graph to visualise how trade balance has changed between 2020 to 2022 for each of Singapore's major trading partner in terms of merchandise trade in 2022 based on [Singstat](https://singstat.gov.sg/modules/infographics/singapore-international-trade#:~:text=In%202022%2C%20Mainland%20China%2C%20Malaysia,exports%20to%20these%20trading%20partners.&text=Made%20up%2083.0%25%20of%20non-oil%20domestic%20exports.).
+The code chunk below creates the Braid graph to visualise how trade balance has changed between 2020 to 2022 for each of Singapore's major trading partner in terms of merchandise trade in 2022 based on [Singstat](https://singstat.gov.sg/modules/infographics/singapore-international-trade#:~:text=In%202022%2C%20Mainland%20China%2C%20Malaysia,exports%20to%20these%20trading%20partners.&text=Made%20up%2083.0%25%20of%20non-oil%20domestic%20exports.).
 
 ```{r}
 ggplot() +
@@ -484,7 +484,7 @@ ggplot() +
 
 **Analysis:**
 
-From the braid chart, we can see that Singapore has consistently maintained a trade surplus with Hong Kong and Indonesia as well as a trade deficit with Taiwan throughout 2020 to 2022. It has maintained mostly a trade surplus with Thailand and mostly a trade deficit with Malaysia except for certain months. Meanwhile, trade balance fluctuated for Mainland China and United States. For Japan and Republic of Korea, trade fluctuated in 2020 to 2021 but became mostly a trade deficit in 2022.
+From the Braid graph, we can see that Singapore has consistently maintained a trade surplus with Hong Kong and Indonesia as well as a trade deficit with Taiwan throughout 2020 to 2022. It has maintained mostly a trade surplus with Thailand and mostly a trade deficit with Malaysia except for certain months. Meanwhile, trade balance fluctuated for Mainland China and United States. For Japan and Republic of Korea, trade fluctuated in 2020 to 2021 but became mostly a trade deficit in 2022.
 
 ## 3.3 Slope Graph
 
@@ -541,7 +541,7 @@ Singapore's trade balance for almost all the major trading partners worsened for
 
 ## 3.4 Horizon graph
 
-We will create the slope graph to visualise how trade balance has decreased (in red) and increased (in blue) between January 2020 to December 2022. I set the origin as 0 since there is positive trade balance (trade surplus) and negative trade balance (trade deficit).
+We will create the Horizon graph to visualise how trade balance has decreased (in red) and increased (in blue) between January 2020 to December 2022. I set the origin as 0 since there is positive trade balance (trade surplus) and negative trade balance (trade deficit).
 
 I added in some vertical lines which represent 5 significant events between 2020-2022:
 
