@@ -661,6 +661,6 @@ We can also see from the red vertical lines that fluctuations seem to happen whe
 
 # 4. Learning points
 
-For this assigment, I learnt that there are many different ways of representing time series data which can reveal different patterns with different interpretations. The charts help us to visualise how trends fluctuate over time at the high level and compare between different observations.
+For this assignment, I learnt that there are many different ways of representing time series data which can reveal different patterns with different interpretations. The charts help us to visualise how trends fluctuate over time at the high level and compare between different observations.
 
 I find the cycle plot very useful as most of the the other charts only compare across time chronologically. However, the cycle plot can isolate the months and compare by month across years, which allows us to account for seasonality in our analysis.
